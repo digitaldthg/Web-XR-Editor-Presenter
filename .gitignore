@@ -1,6 +1,5 @@
 .DS_Store
-frontend_app/node_modules
-frontend_app/dist
+node_modules
 
 
 # local env files
