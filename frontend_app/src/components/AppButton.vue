@@ -24,9 +24,7 @@ export default {
 		background: {
 			type: String,
 			default: 'white'
-		},
-		/** @deprecated Use color instead */
-		oldColor: String
+		}
 	},
 	computed: {
 		styles() {
@@ -67,7 +65,7 @@ export default {
 <docs>
 This button is amazing, use it responsibly.
 
-## Examples
+### Examples
 
 Orange button:
 
