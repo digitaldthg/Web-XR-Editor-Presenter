@@ -56,10 +56,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/main.scss';
-
+@import "../styles/variables.scss";
+@import "../styles/main.scss";
 .appbutton{
 	border-radius: 1rem;
+	border-color: $custom-blue;
 }
 </style>
 
