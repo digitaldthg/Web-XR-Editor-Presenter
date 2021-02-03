@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    https: true
+    https: false
   },
   chainWebpack: config => {
     config.module.rules.delete("svg");

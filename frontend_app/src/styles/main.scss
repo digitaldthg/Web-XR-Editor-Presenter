@@ -1,0 +1,14 @@
+@import "./resets/reset.scss";
+@import "./resets/custom_reset.scss";
+
+
+@import "./typography.scss";
+@import "./flex.scss";
+@import "./layout.scss";
+@import "./card.scss";
+
+#app {
+  width:100%;
+  height:100%;
+  color: #2c3e50;
+}
