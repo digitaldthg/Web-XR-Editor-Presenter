@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    https: false
+    https: true
   },
   chainWebpack: config => {
     config.module.rules.delete("svg");
@@ -18,7 +18,7 @@ module.exports = {
           ]
         },
         {
-          test: /\.(bin|glb)$/,
+          test: /\.(bin|glb|patt|png)$/,
           use: [
             {
               loader: 'file-loader'
@@ -34,6 +34,6 @@ module.exports = {
 		}
       ]
     },
-    plugins: []
+    plugins: [ ]
   }
 }

@@ -2,6 +2,8 @@
   <div class="appinfopanel" :style="styles">
     <!-- @slot Use this slot to place the button content -->
     <slot></slot>
+
+    test
   </div>
 </template>
 
@@ -10,6 +12,8 @@ export default {
   name: "AppInfoPanel",
   mixins: [],
   props: {
+
+
     /**
      * Sets the button font color
      */

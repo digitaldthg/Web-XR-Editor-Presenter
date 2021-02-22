@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@types/vue-markdown": "^2.2.1",
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "aframe": "^1.2.0",
+    "aframe-extras": "^6.1.1",
     "axios": "^0.21.1",
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
@@ -27,6 +30,7 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "copy-webpack-plugin": "^6.2.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "less": "^4.1.1",
