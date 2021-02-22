@@ -21,23 +21,23 @@
 
 <script>
 import config from '../main.config';
-import webXRScene from '../webxr/src';
-import {AmbientLight, DirectionalLight, Object3D} from 'three';
+//import webXRScene from '../webxr/src';
+//import {AmbientLight, DirectionalLight, Object3D} from 'three';
 
 export default {
   name : "View_Single_Projekt_Scene",
   mounted(){
     
 
-    this.xr = new webXRScene("scene");
-    this.xr.Controls.SetPosition(0,2,-10);
+    // this.xr = new webXRScene("scene");
+    // this.xr.Controls.SetPosition(0,2,-10);
 
-    var basicLight = new DirectionalLight(0xeeeeee);
-    basicLight.position.set(0,5,-10);
-    this.xr.Scene.add(basicLight);
+    // var basicLight = new DirectionalLight(0xeeeeee);
+    // basicLight.position.set(0,5,-10);
+    // this.xr.Scene.add(basicLight);
 
-    //debug
-    window._xr = this.xr;
+    // //debug
+    // window._xr = this.xr;
     
     this.$store.dispatch("GetSingleProjekt" , this.$route.params.id).then(this.Init);
 

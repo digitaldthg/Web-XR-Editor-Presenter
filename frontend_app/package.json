@@ -10,7 +10,6 @@
     "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "dependencies": {
-    "@types/vue-markdown": "^2.2.1",
     "axios": "^0.21.1",
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
