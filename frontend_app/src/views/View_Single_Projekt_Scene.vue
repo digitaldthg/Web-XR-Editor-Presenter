@@ -3,33 +3,11 @@
 
     <AframeScene />
 
-    <!-- <a-scene embedded="" arjs="sourceType: webcam;" class="" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="">
-      <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-      <a-marker type='pattern' :url="GetPattern"></a-marker>
-    </a-scene> -->
-    <!-- <a-scene embedded arjs='sourceType: webcam; detectionMode: mono; trackingMethod: best; debugUIEnabled: true;' vr-mode-ui="enabled: true">
-    		<a-assets>
-            <video preload="auto" id="vid" response-type="arraybuffer" loop="true" autoplay type="video/mp4" crossorigin webkit-playsinline playsinline controls>
-                <img :src="GetPlaceholderImage"> Your browser does not support Or Else Please Click Reset Button.
-            </video>
-        </a-assets>  
-         <a-marker id="memarker" type="pattern" :url="GetMarkerImage" vidhandler>
-            <a-entity 
-							gltf-model="url(http://192.168.0.10:1337/uploads/Painted_Haus_70a6ac287e.glb)">
-						</a-entity>
-            
-						<a-light type="directional" color="white" position="0 5 0"></a-light>
-        </a-marker>
-      
-    <a-entity camera></a-entity>
-    </a-scene> -->
-
-
-    <transition name="fade">
+    <!--<transition name="fade">
       <div class="loader" v-if="loading">Loading</div>
     </transition>
 
-    <!-- <div class="collection slide-container-collection" v-if="this.$store.state.currentProjekt != null">
+     <div class="collection slide-container-collection" v-if="this.$store.state.currentProjekt != null">
       <div class="slide-container" v-for="slideContainer in this.$store.state.currentProjekt.slide_containers" v-bind:key="slideContainer.id">
         <h1>{{slideContainer.Name}}</h1>
         <div class="collection slide-collection">
@@ -45,12 +23,6 @@
 
 <script>
 import config from '../main.config';
-// import webXRScene from '../webxr/src';
-// import {AmbientLight, DirectionalLight, Object3D} from 'three';
-import MarkerController from '../3DScene/MarkerController';
-import pattern from '../3DScene/pattern-marker.patt';
-
-
 import AframeScene from '../3DScene/AframeScene';
 
 
@@ -61,18 +33,6 @@ export default {
     AframeScene
   },
   mounted(){
-
-
-    // this.xr = new webXRScene("scene");
-    // this.xr.Controls.SetPosition(0,2,-10);
-
-    // var basicLight = new DirectionalLight(0xeeeeee);
-    // basicLight.position.set(0,5,-10);
-    // this.xr.Scene.add(basicLight);
-
-    //debug
-    // window._xr = this.xr;
-    // 
     this.$store.dispatch("GetSingleProjekt" , this.$route.params.id).then(this.Init);
 
   },

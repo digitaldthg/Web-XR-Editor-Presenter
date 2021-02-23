@@ -2,11 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import { store } from './store';
 import router from './router';
-import aframe from 'aframe';
 
-window.AFRAME = aframe;
-
-require('aframe-extras'); // don't use import, use require()!
 
 
 Vue.config.productionTip = false;
@@ -24,6 +20,8 @@ Vue.config.ignoredElements = [
   'a-assets',
   'a-marker',
   'a-light',
+  'a-marker-camera',
+  'a-group'
 ]
 
 

@@ -15,7 +15,8 @@ export const store = new Vuex.Store({
     projekte : [],
     currentProjekt : null,
     slides : [],
-    currentPage : null
+    currentPage : null,
+    currentSlideIdx : 0
   },
   actions: {
     GetSinglePage({commit}, pageName ){
@@ -72,7 +73,10 @@ export const store = new Vuex.Store({
     SetPage(state,data){
       state.currentPage = data;
     }
-    
+    ,
+    SetCurrentSlideIdx(state,data){
+      state.currentSlideIdx += data;
+    }
   }
 
 })
