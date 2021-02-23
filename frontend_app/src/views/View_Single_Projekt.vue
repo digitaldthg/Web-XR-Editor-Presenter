@@ -15,7 +15,7 @@
 <script>
 
 import config from '../main.config';
-import SlideContainer from '../partials/SlideContainer';
+import SlideContainer from '../partials/SlideContainerProject';
 
 export default {
   name : "View_Projekte",

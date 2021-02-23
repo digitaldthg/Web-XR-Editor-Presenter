@@ -18,7 +18,7 @@ module.exports = {
           ]
         },
         {
-          test: /\.(bin|glb|patt|png)$/,
+          test: /\.(bin|glb|patt|png|dat)$/,
           use: [
             {
               loader: 'file-loader'
