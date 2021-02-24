@@ -18,22 +18,48 @@ export const store = new Vuex.Store({
     currentPage: null,
     currentSlideIdx: 0,
     currentTrackedMarkers: [],
-    currentSelectedSlideContainer: null
+    currentSelectedSlideContainer: null,
+    cmsAPIUrl: "http://192.168.0.10:1337",
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjE0MTYyMTEwLCJleHAiOjE2MTY3NTQxMTB9.SDyUY_fAwTsK4wiLTt2Edua3Q1FZiLk746OWu9xEqXA'
   },
   actions: {
     GetSinglePage({ commit }, pageName) {
-      return axios.get(config.CMS_BASE_URL + '/' + pageName).then(response => {
-        console.log(response.data);
+
+
+      return axios({
+        method: "GET",
+        url: config.CMS_BASE_URL + '/' + pageName,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.state.token}`
+        }
+      }).then(response => {
 
         commit("SetPage", response.data);
         return response.data;
 
       }).catch(error => {
         console.log('error while loading data:', error);
-      });
+      });;
+
+      /*return axios.get(config.CMS_BASE_URL + '/' + pageName).then(response => {
+
+        commit("SetPage", response.data);
+        return response.data;
+
+      }).catch(error => {
+        console.log('error while loading data:', error);
+      });*/
     },
     GetProjekte({ commit }) {
-      return axios.get(config.CMS_BASE_URL + '/projekts').then(response => {
+      return axios({
+        method: "GET",
+        url: config.CMS_BASE_URL + '/projekts',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.state.token}`
+        }
+      }).then(response => {
 
         commit("SetProjekte", response.data);
         return response.data;
@@ -43,6 +69,17 @@ export const store = new Vuex.Store({
       }).catch(error => {
         console.log('error while loading data:', error);
       });
+
+      /*return axios.get(config.CMS_BASE_URL + '/projekts').then(response => {
+
+        commit("SetProjekte", response.data);
+        return response.data;
+
+      }).then((data) => {
+        return data;
+      }).catch(error => {
+        console.log('error while loading data:', error);
+      });*/
     },
     GetSingleProjekt({ commit, state }, id) {
 
@@ -57,11 +94,24 @@ export const store = new Vuex.Store({
         }
       }
 
-      return axios.get(config.CMS_BASE_URL + '/projekts/' + id).then(response => {
+      return axios({
+        method: "GET",
+        url: config.CMS_BASE_URL + '/projekts/' + id,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.state.token}`
+        }
+      }).then(response => {
         commit("SetSingleProjekt", response.data);
       }).catch(error => {
         console.log('error while loading data:', error);
       });
+
+      /*return axios.get(config.CMS_BASE_URL + '/projekts/' + id).then(response => {
+        commit("SetSingleProjekt", response.data);
+      }).catch(error => {
+        console.log('error while loading data:', error);
+      });*/
 
     }
   },
@@ -78,8 +128,9 @@ export const store = new Vuex.Store({
     ,
     SetCurrentSlideIdx(state, data) {
       state.currentSlideIdx += data;
-      var size = state.currentProjekt.slide_containers.filter(container => container.id == state.currentSelectedSlideContainer)[0].Slides.length;
-      state.currentSlideIdx = state.currentSlideIdx % size;
+      var size = state.currentSelectedSlideContainer.Slides.length;
+      state.currentSlideIdx  = state.currentSlideIdx < 0 ? size-1 : state.currentSlideIdx % size
+      console.log(state.currentSlideIdx);
     },
     AddTrackedMarker(state, data) {
       state.currentTrackedMarkers.push(data)
@@ -90,10 +141,10 @@ export const store = new Vuex.Store({
         state.currentTrackedMarkers.splice(index, 1);
       }
     },
-    SetSelectedSlideContainer(state,data){
-      if(data == state.currentSelectedSlideContainer ){
+    SetSelectedSlideContainer(state, data) {
+      if (data == state.currentSelectedSlideContainer) {
         state.currentSelectedSlideContainer = null;
-      }else{
+      } else {
         state.currentSelectedSlideContainer = data;
       }
       state.currentSlideIdx = 0;

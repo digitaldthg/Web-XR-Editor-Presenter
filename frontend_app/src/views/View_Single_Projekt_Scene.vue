@@ -8,29 +8,28 @@
     >
       <button
         :class="'tracked-' + GetTrackingState(slideContainer.id)"
-        @click="SetSelected(slideContainer.id)"
+        @click="SetSelected(slideContainer)"
       >
-        {{ slideContainer.Name }} (id: {{slideContainer.id}}, {{ slideContainer.Marker.Marker.name }},
-        selected: {{ GetSelectedState(slideContainer.id) }})
+        {{ slideContainer.Name }} (id: {{ slideContainer.id }},
+        {{ slideContainer.Marker.Marker.name }}, selected:
+        {{ GetSelectedState(slideContainer) }})
       </button>
     </div>
-    <div v-if="this.$store.state.currentSelectedSlideContainer != null">
-      <button @click="SetSlideIdx(-1)">Previous</button>
-      {{this.$store.state.currentSlideIdx}}
-      <button @click="SetSlideIdx(+1)">Next</button>
-    </div>
     <AframeScene />
+    <Slideshow />
   </div>
 </template>
 
 <script>
 import config from "../main.config";
 import AframeScene from "../3DScene/AframeScene";
+import Slideshow from "../partials/Slideshow";
 
 export default {
   name: "View_Single_Projekt_Scene",
   components: {
     AframeScene,
+    Slideshow,
   },
   mounted() {
     this.$store
@@ -43,20 +42,20 @@ export default {
     };
   },
   methods: {
-    SetSlideIdx(direction){
-this.$store.commit("SetCurrentSlideIdx", direction);
+    SetSlideIdx(direction) {
+      this.$store.commit("SetCurrentSlideIdx", direction);
     },
     GetPattern() {
       return pattern;
     },
-    SetSelected(id) {
-      this.$store.commit("SetSelectedSlideContainer",id);
+    SetSelected(container) {
+      this.$store.commit("SetSelectedSlideContainer", container);
     },
     GetTrackingState(id) {
       return this.$store.state.currentTrackedMarkers.includes(String(id));
     },
-    GetSelectedState(id) {
-      return this.$store.state.currentSelectedSlideContainer == String(id);
+    GetSelectedState(container) {
+      return this.$store.state.currentSelectedSlideContainer == container;
     },
     Init() {
       var projekt = this.$store.state.currentProjekt;
@@ -105,10 +104,10 @@ this.$store.commit("SetCurrentSlideIdx", direction);
 
 <style>
 .tracked-true {
-  background: #899DA4;
+  background: #899da4;
 }
 .tracked-false {
-  background: #C93312;
+  background: #c93312;
 }
 #scene {
   top: 0;

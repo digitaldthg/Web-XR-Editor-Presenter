@@ -24,6 +24,7 @@
     "vue-dynamic-dropdown": "^1.0.12",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.5.1",
+    "vue-svg-loader": "^0.16.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

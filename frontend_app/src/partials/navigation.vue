@@ -11,12 +11,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "../styles/variables";
   nav{
-    padding:1rem;
+    background: white;
     width:100%;
+    height: $navigation-height;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     position: absolute;
     top:0;
     left:0;

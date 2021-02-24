@@ -1,7 +1,5 @@
 <template>
-  <a-entity>
-
-      <a-entity   :v-if="this.$store.state.currentSelectedSlideContainer == String(container.id)">
+      <a-entity  v-if="this.$store.state.currentSelectedSlideContainer == container">
         <a-entity
           v-for="slideElement in container.Slides[currentSlideIdx].SlideElements"
           v-bind:key="slideElement.id"
@@ -13,17 +11,19 @@
         >
         </a-entity>
       </a-entity>
-    </a-entity>
 
 </template>
 
 <script>
+
 export default {
   name: "SlideContainer",
   props: {
     container: null,
   },
-  components: {},
+  components: {
+
+  },
   computed: {
     currentSlideIdx() {
       return this.$store.state.currentSlideIdx;

@@ -4,7 +4,6 @@
     <main>
       <router-view></router-view>
     </main>
-
   </div>
 </template>
 
@@ -16,7 +15,7 @@ import Navigation from './partials/navigation.vue';
 export default {
   name: 'App',
   components: {
-    Navigation
+    Navigation,
   },
   mounted(){
     console.log("app", this.$route.path);
@@ -33,6 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
 
 </style>
