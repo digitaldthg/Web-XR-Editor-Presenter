@@ -21,7 +21,6 @@
     "promise-polyfill": "^8.2.0",
     "three": "^0.120.1",
     "vue": "^2.6.11",
-    "vue-dynamic-dropdown": "^1.0.12",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.5.1",
     "vue-svg-loader": "^0.16.0",

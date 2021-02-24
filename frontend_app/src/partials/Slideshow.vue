@@ -3,23 +3,25 @@
     class="slideshow-container"
     v-if="this.$store.state.currentSelectedSlideContainer != null"
   >
-    <button @click="SetSlideIdx(-1)">Previous</button>
-    <SlidePreview v-for="slide in this.$store.state.currentSelectedSlideContainer.Slides"
-    v-bind:key=slide.id
-    :slide=slide>
-      </SlidePreview>
-    <button @click="SetSlideIdx(+1)">Next</button>
+    <button @click="SetSlideIdx(-1)"><Arrow class="svg left" /></button>
+    <SlidePreview
+      v-for="slide in this.$store.state.currentSelectedSlideContainer.Slides"
+      v-bind:key="slide.id"
+      :slide="slide"
+    >
+    </SlidePreview>
+    <button @click="SetSlideIdx(+1)"><Arrow class="svg right" /></button>
   </div>
 </template>
 
 <script>
-import SlidePreview from "./SlidePreview"
-import Arrow from "../assets/arrow.svg"
+import SlidePreview from "./SlidePreview";
+import Arrow from "../assets/arrow.svg";
 export default {
   name: "Slideshow",
-  components:{
+  components: {
     SlidePreview,
-    Arrow
+    Arrow,
   },
   methods: {
     SetSlideIdx(direction) {
@@ -29,18 +31,35 @@ export default {
 };
 </script>
 
-<style land="scss" scoped>
+<style lang="scss" scoped>
 @import "../styles/variables.scss";
-button{
+@import "../styles/main.scss";
+button {
   width: 100px;
-  height: 100%
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: 0;
+  margin: 0;
+  padding: 0;
 }
+.svg {
+  width: 50px;
+fill:$darkGrey
+}
+.left {
+    transform: rotate(90deg);
+  }
+  .right {
+    transform: rotate(-90deg);
+  }
+
 .slideshow-container {
   position: absolute;
   bottom: 0px;
   width: 100%;
   height: 100px;
   justify-content: space-between;
-  display:flex;
+  display: flex;
 }
 </style>

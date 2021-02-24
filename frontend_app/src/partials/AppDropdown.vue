@@ -1,5 +1,5 @@
 <template>
-  <vue-dropdown :config="config" @setSelectedOption="setNewSelectedOption($event)"></vue-dropdown>
+  <VueDropdown :config="config" @setSelectedOption="dropdownChanged($event)"></VueDropdown>
 </template>
 
 <script>
@@ -30,10 +30,9 @@ export default {
     },
   },
   methods: {
-	  setNewSelectedOption(selectedOption) {
-      this.config.prefix = selectedOption;
-      this.$emit('callback', selectedOption.info);
-    }
+	  dropdownChanged(){
+		  
+	  }
   },
 };
 </script>

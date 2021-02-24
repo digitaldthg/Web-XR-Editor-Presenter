@@ -1,20 +1,12 @@
 <template>
   <div id="scene" v-if="this.$store.state.currentProjekt != null">
-    <h1>Current Project: {{ this.$store.state.currentProjekt.Name }}</h1>
-    <div
-      v-for="slideContainer in this.$store.state.currentProjekt
-        .slide_containers"
-      v-bind:key="slideContainer.id"
-    >
-      <button
-        :class="'tracked-' + GetTrackingState(slideContainer.id)"
-        @click="SetSelected(slideContainer)"
-      >
-        {{ slideContainer.Name }} (id: {{ slideContainer.id }},
-        {{ slideContainer.Marker.Marker.name }}, selected:
-        {{ GetSelectedState(slideContainer) }})
-      </button>
-    </div>
+    <h1>{{ this.$store.state.currentProjekt.Name }}</h1>
+    <AppDropdown
+      color="white"
+      placeholder='Select a marker'
+      :options="GetOptions()"
+      @callback="SetContainer"
+    />
     <AframeScene />
     <Slideshow />
   </div>
@@ -24,12 +16,14 @@
 import config from "../main.config";
 import AframeScene from "../3DScene/AframeScene";
 import Slideshow from "../partials/Slideshow";
+import AppDropdown from "../components/AppDropdown";
 
 export default {
   name: "View_Single_Projekt_Scene",
   components: {
     AframeScene,
     Slideshow,
+    AppDropdown,
   },
   mounted() {
     this.$store
@@ -42,6 +36,30 @@ export default {
     };
   },
   methods: {
+    SetContainer(container) {
+      console.log("CONTAINER: ", container);
+      this.$store.commit("SetSelectedSlideContainer", container);
+    },
+    GetOptions() {
+      var options = [];
+      Object.values(this.$store.state.currentProjekt.slide_containers).forEach(
+        (container) => {
+          
+          var url = null;
+          if(container.Marker.MarkerPreview != null){
+            url = container.Marker.MarkerPreview.url
+          }
+          console.log("MARKER ",url);
+          options.push({
+            value: container.Name,
+            info: container,
+            image: this.$store.state.cmsAPIUrl+url,
+          });
+        }
+      );
+
+      return options;
+    },
     SetSlideIdx(direction) {
       this.$store.commit("SetCurrentSlideIdx", direction);
     },
