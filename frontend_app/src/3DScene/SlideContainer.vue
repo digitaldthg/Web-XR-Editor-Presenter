@@ -1,6 +1,7 @@
 <template>
       <a-entity  v-if="this.$store.state.currentSelectedSlideContainer == container">
         <a-entity
+        scale="0.1 0.1 0.1"
           v-for="slideElement in container.Slides[currentSlideIdx].SlideElements"
           v-bind:key="slideElement.id"
           :gltf-model="
@@ -9,13 +10,15 @@
             )
           "
         >
+        
         </a-entity>
+
       </a-entity>
 
 </template>
 
 <script>
-
+import config from "../main.config";
 export default {
   name: "SlideContainer",
   props: {
@@ -34,7 +37,7 @@ export default {
   },
   methods: {
     GetModelPath(path) {
-      return this.$store.state.cmsAPIUrl + path;
+      return config.CMS_BASE_URL + path;
     },
     init() {},
   },

@@ -1,23 +1,27 @@
 <template>
   <div :class="'preview visible-' + CheckVisibility()">
-    
-    <img class="preview-image"
-      v-if="slide.PreviewImage != null"
-      :src="GetImageUrl(slide.PreviewImage.url)"
-    />
+    <img class="preview-image" v-if="slide.PreviewImage != null" :src="this.GetImageUrl(slide.PreviewImage)"/>
     <div class="title-text">{{ slide.Name }}</div>
   </div>
-</template>
+</template> 
 
 <script>
+import config from "../main.config";
 export default {
   name: "SlidePreview",
   props: {
     slide: null,
   },
+  computed: {
+    computedStyles: function () {
+      return [
+        { "--img-url": this.GetImageUrl(this.slide.PreviewImage)},
+        ];
+    },
+  },
   methods: {
     GetImageUrl(path) {
-      return this.$store.state.cmsAPIUrl + path;
+      return config.CMS_BASE_URL  + path.url;
     },
     CheckVisibility() {
       return (
@@ -42,7 +46,6 @@ export default {
   position: relative;
 }
 
-
 .visible-true {
   border-width: 5px;
 }
@@ -51,12 +54,14 @@ export default {
   border-width: 1px;
 }
 
-.title-text{
+.title-text {
   position: absolute;
-  top:5px;
-  width: 100px;
+  top: 5px;
+  width: 90px;
 }
-.preview-image{
 
+.preview-image {
+  //background-image: --img-url;
+  //background-size: cover;
 }
 </style>

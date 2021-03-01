@@ -16,18 +16,20 @@
       type="pattern"
       vidhandler
       :detect-visible-component="GetID(slideContainer.id)"
-    
-    >   
-      <SlideContainer
-        :container="slideContainer"
-      />
+    >
+      <SlideContainer :container="slideContainer" />
     </a-marker>
     <a-entity camera></a-entity>
-    <a-light type="directional" color="white" position="0 5 0"></a-light>
+    <a-entity light="type: ambient; color: #BBB"></a-entity>
+    <a-entity
+      light="type: directional; color: #FFF; intensity: 0.6"
+      position="-0.5 1 1"
+    ></a-entity>
   </a-scene>
 </template>
 
 <script>
+import config from "../main.config";
 import SlideContainer from "./SlideContainer.vue";
 import PatternMarker from "./pattern-marker.patt";
 import CameraSettings from "./camera_para-iPhone 4 rear 640x480.dat";
@@ -49,7 +51,7 @@ export default {
     },
     GetPattern(path) {
       //var path = "/uploads/pattern_marker_2fcf84ae6f.patt";
-      return "http://192.168.0.10:1337" + path;
+      return config.CMS_BASE_URL + path;
     },
   },
 };

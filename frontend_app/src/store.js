@@ -19,8 +19,7 @@ export const store = new Vuex.Store({
     currentSlideIdx: 0,
     currentTrackedMarkers: [],
     currentSelectedSlideContainer: null,
-    cmsAPIUrl: "http://82.165.18.187",
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjE0MTYyMTEwLCJleHAiOjE2MTY3NTQxMTB9.SDyUY_fAwTsK4wiLTt2Edua3Q1FZiLk746OWu9xEqXA'
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE0NjA4ODgwLCJleHAiOjE2MTcyMDA4ODB9.K7qxIMON4zlL6nHHHz_Z6oSH9nw9ROK3nMNURdD9xR8'
   },
   actions: {
     GetSinglePage({ commit }, pageName) {

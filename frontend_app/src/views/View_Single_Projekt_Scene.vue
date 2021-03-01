@@ -68,7 +68,7 @@ export default {
           options.push({
             value: container.Name,
             info: container,
-            image: this.$store.state.cmsAPIUrl+url,
+            image: config.CMS_BASE_URL+url,
           });
         }
       );
