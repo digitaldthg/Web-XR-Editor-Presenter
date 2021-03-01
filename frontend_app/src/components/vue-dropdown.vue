@@ -8,11 +8,11 @@
     <div class="dropdown-label-container">
       <div class="dropdown-label">
         <span class="text">
-          {{ (config.prefix ? config.prefix.value : "") + " "
-          }}{{ config.placeholder ? config.placeholder : "" }}
+          {{ config.placeholder ? (config.placeholder.value  ? config.placeholder.value : config.placeholder) : "Placeholder" }}
         </span>
-
-        <img class="icon" v-if="config.prefix.image != null" :src="config.prefix.image"/>
+        <div v-if="config.placeholder != null">
+        <img class="icon" v-if="config.placeholder.image != null" :src="config.placeholder.image"/>
+        </div>
         <i class="angle-down" :class="{ toggled: isExpanded }"></i>
       </div>
     </div>
@@ -37,9 +37,8 @@ export default {
   data() {
     return {
       isBottomSectionToggled: false,
-      optionsHeight: 0,
       optionHeight: 50,
-      width: 100,
+      dropdownWidth: 350,
       configOptions: [],
       backgroundColor: "red",
       backgroundExpandedColor: "white",
@@ -59,7 +58,7 @@ export default {
         { "--options-height-neg": "-" + this.optionsHeight + "px" },
         { "--option-height": this.optionHeight + "px" },
         { "--main-el-border-radius": this.borderRadius },
-        { "--dropdown-width": this.width + "px" },
+        { "--dropdown-width": this.dropdownWidth + "px" },
         { "--dropdown-background-color": this.backgroundColor },
         { "--dropdown-expanded-color": this.backgroundExpandedColor },
         { "--dropdown-border": this.border },

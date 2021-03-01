@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     GetModelPath(path) {
-      return "http://192.168.0.10:1337" + path;
+      return this.$store.state.cmsAPIUrl + path;
     },
     init() {},
   },

@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
     currentSlideIdx: 0,
     currentTrackedMarkers: [],
     currentSelectedSlideContainer: null,
-    cmsAPIUrl: "http://192.168.0.10:1337",
+    cmsAPIUrl: "http://82.165.18.187",
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjE0MTYyMTEwLCJleHAiOjE2MTY3NTQxMTB9.SDyUY_fAwTsK4wiLTt2Edua3Q1FZiLk746OWu9xEqXA'
   },
   actions: {

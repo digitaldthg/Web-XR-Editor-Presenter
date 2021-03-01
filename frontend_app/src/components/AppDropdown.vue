@@ -7,10 +7,7 @@ import VueDropdown from "./vue-dropdown";
 export default {
   name: "AppDropdown",
   props: {
-	  placeholder: {
-			type: String,
-			default: 'Placeholder'
-		},
+	  placeholder: null,
 	  color: {
 			type: String,
 			default: 'blue'
@@ -24,14 +21,14 @@ export default {
     config() {
       return {
           options: this.options,
-          prefix: this.placeholder,
+          selected: this.placeholder,
           backgroundColor: this.color,
         }
     },
   },
   methods: {
 	  setNewSelectedOption(selectedOption) {
-      this.config.prefix = selectedOption;
+      this.config.placeholder = selectedOption;
       this.$emit('callback', selectedOption.info);
     }
   },
