@@ -76,6 +76,7 @@ $option-padding: 4px 10px;
       height: var(--option-height);
       font-family: "Source Sans Pro", sans-serif;
       font-size: 18px;
+      justify-content: space-between;
     }
     .option:hover {
       color: $default-text-hover-color;

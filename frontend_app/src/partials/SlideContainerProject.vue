@@ -1,7 +1,7 @@
 <template>
   <div class="slide-container">
     <div class="card-header">
-      <img :src="config.CMS_BASE_URL + slideContainer.PreviewImage.url" />
+      <img v-if="slideContainer.PreviewImage!=null" :src="config.CMS_BASE_URL + slideContainer.PreviewImage.url" />
     </div>
     <div class="card-no-style">
       <h2>
@@ -56,6 +56,6 @@ export default {
   width: 50%;
 }
 .card-header {
-  height: 500px;
+  height: 300px;
 }
 </style>

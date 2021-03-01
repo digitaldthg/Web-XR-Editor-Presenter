@@ -3,10 +3,25 @@
     <h1>{{ this.$store.state.currentProjekt.Name }}</h1>
     <AppDropdown
       color="white"
-      placeholder='Select a marker'
+      placeholder="Select a marker"
       :options="GetOptions()"
       @callback="SetContainer"
     />
+    <!--<div
+      v-for="slideContainer in this.$store.state.currentProjekt
+        .slide_containers"
+      v-bind:key="slideContainer.id"
+    >
+    <AppDropdown/>
+      <button
+        :class="'tracked-' + GetTrackingState(slideContainer.id)"
+        @click="SetSelected(slideContainer)"
+      >
+        {{ slideContainer.Name }} (id: {{ slideContainer.id }},
+        {{ slideContainer.Marker.Marker.name }}, selected:
+        {{ GetSelectedState(slideContainer) }})
+      </button>
+    </div>-->
     <AframeScene />
     <Slideshow />
   </div>
@@ -41,7 +56,7 @@ export default {
       this.$store.commit("SetSelectedSlideContainer", container);
     },
     GetOptions() {
-      var options = [];
+      var options = [{ value: "None", id: null }];
       Object.values(this.$store.state.currentProjekt.slide_containers).forEach(
         (container) => {
           
