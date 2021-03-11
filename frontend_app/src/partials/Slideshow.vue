@@ -1,6 +1,6 @@
 <template>
   <div
-    class="slideshow-container"
+    class="slideshow-container pointerOn"
     v-if="this.$store.state.currentSelectedSlideContainer != null"
   >
     <button @click="SetSlideIdx(-1)"><Arrow class="svg left" /></button>
@@ -61,5 +61,6 @@ fill:$darkGrey
   height: 100px;
   justify-content: space-between;
   display: flex;
+
 }
 </style>

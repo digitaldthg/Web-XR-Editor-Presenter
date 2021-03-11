@@ -1,5 +1,6 @@
 <template>
   <div>
+    DESKTOP SCENE
     <SlideContainer v-for="slideContainer in this.$store.state.currentProjekt
         .slide_containers"
         v-bind:key="slideContainer.id"

@@ -40,6 +40,9 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
 @import "../styles/main.scss";
+VueDropdown{
+  pointer-events: all;
+}
 </style>
 
 <docs>

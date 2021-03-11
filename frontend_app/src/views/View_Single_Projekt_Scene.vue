@@ -1,5 +1,6 @@
 <template>
-  <div id="scene" v-if="this.$store.state.currentProjekt != null">
+  <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
+    <div class="dropdonw-container pointerOn">
     <h1>{{ this.$store.state.currentProjekt.Name }}</h1>
     <AppDropdown
       color="white"
@@ -7,6 +8,7 @@
       :options="GetOptions()"
       @callback="SetContainer"
     />
+    </div>
     <!--<div
       v-for="slideContainer in this.$store.state.currentProjekt
         .slide_containers"
@@ -143,13 +145,23 @@ export default {
 </script>
 
 <style>
+.dropdown-container{
+  position:absolute;
+}
+.menu{
+  display: inline-block;
+   z-index: 1;
+   position: relative;
+   width:100%;
+   height: 100%;
+}
 .tracked-true {
   background: #899da4;
 }
 .tracked-false {
   background: #c93312;
 }
-#scene {
+#ar-scene {
   top: 0;
   left: 0;
   right: 0;
