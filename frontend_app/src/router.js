@@ -19,11 +19,7 @@ const router = new VueRouter({
       name: 'Projekte',
       component: View_Projekte,
     },{
-      path: '/projekt/detail/:id',
-      name: 'Projekt',
-      component: View_Single_Projekt,
-    },{
-      path: '/projekt/scene/:id',
+      path: '/projekt/:id',
       name: 'Projekt',
       component: View_Single_Projekt_Scene,
     }

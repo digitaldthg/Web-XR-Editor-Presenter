@@ -12,7 +12,7 @@ export default {
 			type: String,
 			default: 'blue'
 		},
-    options:[]
+    options:null
   },
   components: {
     VueDropdown,

@@ -22,34 +22,6 @@ export const store = new Vuex.Store({
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE0NjA4ODgwLCJleHAiOjE2MTcyMDA4ODB9.K7qxIMON4zlL6nHHHz_Z6oSH9nw9ROK3nMNURdD9xR8'
   },
   actions: {
-    GetSinglePage({ commit }, pageName) {
-
-
-      return axios({
-        method: "GET",
-        url: config.CMS_BASE_URL + '/' + pageName,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.state.token}`
-        }
-      }).then(response => {
-
-        commit("SetPage", response.data);
-        return response.data;
-
-      }).catch(error => {
-        console.log('error while loading data:', error);
-      });;
-
-      /*return axios.get(config.CMS_BASE_URL + '/' + pageName).then(response => {
-
-        commit("SetPage", response.data);
-        return response.data;
-
-      }).catch(error => {
-        console.log('error while loading data:', error);
-      });*/
-    },
     GetProjekte({ commit }) {
       return axios({
         method: "GET",
@@ -68,17 +40,6 @@ export const store = new Vuex.Store({
       }).catch(error => {
         console.log('error while loading data:', error);
       });
-
-      /*return axios.get(config.CMS_BASE_URL + '/projekts').then(response => {
-
-        commit("SetProjekte", response.data);
-        return response.data;
-
-      }).then((data) => {
-        return data;
-      }).catch(error => {
-        console.log('error while loading data:', error);
-      });*/
     },
     GetSingleProjekt({ commit, state }, id) {
 
@@ -105,13 +66,6 @@ export const store = new Vuex.Store({
       }).catch(error => {
         console.log('error while loading data:', error);
       });
-
-      /*return axios.get(config.CMS_BASE_URL + '/projekts/' + id).then(response => {
-        commit("SetSingleProjekt", response.data);
-      }).catch(error => {
-        console.log('error while loading data:', error);
-      });*/
-
     }
   },
   mutations: {

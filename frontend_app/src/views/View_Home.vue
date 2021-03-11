@@ -13,7 +13,7 @@
 export default {
   name : "Home",
   mounted(){
-    this.$store.dispatch("GetSinglePage", "home");    
+    //this.$store.dispatch("GetSinglePage", "home");    
   }
 }
 </script>

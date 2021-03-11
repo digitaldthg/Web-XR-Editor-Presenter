@@ -22,7 +22,8 @@
         {{ GetSelectedState(slideContainer) }})
       </button>
     </div>-->
-    <AframeScene />
+    <AframeScene v-if="this.viewMode == 'AR'" />
+    <DesktopScene v-if="this.viewMode == 'Desktop'" />
     <Slideshow />
   </div>
 </template>
@@ -30,6 +31,7 @@
 <script>
 import config from "../main.config";
 import AframeScene from "../3DScene/AframeScene";
+import DesktopScene from "../3DScene/DesktopScene";
 import Slideshow from "../partials/Slideshow";
 import AppDropdown from "../components/AppDropdown";
 
@@ -37,6 +39,7 @@ export default {
   name: "View_Single_Projekt_Scene",
   components: {
     AframeScene,
+    DesktopScene,
     Slideshow,
     AppDropdown,
   },
@@ -48,6 +51,7 @@ export default {
   data() {
     return {
       loading: true,
+      viewMode: "Desktop",
     };
   },
   methods: {
@@ -59,16 +63,19 @@ export default {
       var options = [{ value: "None", id: null }];
       Object.values(this.$store.state.currentProjekt.slide_containers).forEach(
         (container) => {
-          
           var url = null;
-          if(container.Marker.MarkerPreview != null){
-            url = container.Marker.MarkerPreview.url
+          var image = null;
+          if (container.Marker != null) {
+            if (container.Marker.MarkerPreview != null) {
+              url = container.Marker.MarkerPreview.url;
+              image = config.CMS_BASE_URL + url;
+            }
           }
-          console.log("MARKER ",url);
+          console.log("MARKER ", url);
           options.push({
             value: container.Name,
             info: container,
-            image: config.CMS_BASE_URL+url,
+            image: image,
           });
         }
       );

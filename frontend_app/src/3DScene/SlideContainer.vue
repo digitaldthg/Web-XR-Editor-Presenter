@@ -1,32 +1,18 @@
 <template>
-      <a-entity  v-if="this.$store.state.currentSelectedSlideContainer == container">
-        <a-entity
-        scale="0.1 0.1 0.1"
-          v-for="slideElement in container.Slides[currentSlideIdx].SlideElements"
-          v-bind:key="slideElement.id"
-          :gltf-model="
-            GetModelPath(
-              slideElement.element.Asset.url
-            )
-          "
-        >
-        
-        </a-entity>
-
-      </a-entity>
-
+  <div id="scene" />
 </template>
 
 <script>
 import config from "../main.config";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 export default {
   name: "SlideContainer",
   props: {
     container: null,
   },
-  components: {
-
-  },
+  components: {},
   computed: {
     currentSlideIdx() {
       return this.$store.state.currentSlideIdx;
@@ -40,6 +26,13 @@ export default {
       return config.CMS_BASE_URL + path;
     },
     init() {},
+    animate: function () {
+      requestAnimationFrame(this.animate);
+    },
+  },
+  mounted() {
+    this.init();
+    this.animate();
   },
 };
 </script>

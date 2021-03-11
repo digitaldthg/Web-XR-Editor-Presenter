@@ -30,7 +30,7 @@
 
 <script>
 import config from "../main.config";
-import SlideContainer from "./SlideContainer.vue";
+import SlideContainer from "./SlideContainerAFrame.vue";
 import PatternMarker from "./pattern-marker.patt";
 import CameraSettings from "./camera_para-iPhone 4 rear 640x480.dat";
 
