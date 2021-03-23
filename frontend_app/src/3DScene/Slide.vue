@@ -1,7 +1,7 @@
 <template>
   <div class="slide">
     <div v-if="this.order == currentSlideIdx">
-      {{ this.slide.Name }}
+
     </div>
   </div>
 </template>

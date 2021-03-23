@@ -1,15 +1,16 @@
 <template>
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
-    <div class="dropdonw-container pointerOn">
-    <h1>{{ this.$store.state.currentProjekt.Name }}</h1>
-    <AppDropdown
+    <h1>{{ this.$store.state.currentProjekt.Name }} in {{this.$route.params.mode}} als {{this.$route.params.role}}</h1>
+    <ContainerPreviewContainer  v-if="this.$route.params.role != 'visitor'"/>
+    <!--<AppDropdown
+    v-if="this.$route.params.role != 'visitor'"
       color="white"
       placeholder="Select a marker"
       :options="GetOptions()"
       @callback="SetContainer"
     />
     </div>
-    <!--<div
+    <div
       v-for="slideContainer in this.$store.state.currentProjekt
         .slide_containers"
       v-bind:key="slideContainer.id"
@@ -24,9 +25,9 @@
         {{ GetSelectedState(slideContainer) }})
       </button>
     </div>-->
-    <AframeScene v-if="this.viewMode == 'AR'" />
-    <DesktopScene v-if="this.viewMode == 'Desktop'" />
-    <Slideshow />
+    <AframeScene v-if="this.$route.params.mode == 'ar'" />
+    <DesktopScene v-if="this.$route.params.mode == 'desktop'" />
+    <Slideshow v-if="this.$route.params.role != 'visitor'"/>
   </div>
 </template>
 
@@ -36,6 +37,7 @@ import AframeScene from "../3DScene/AframeScene";
 import DesktopScene from "../3DScene/DesktopScene";
 import Slideshow from "../partials/Slideshow";
 import AppDropdown from "../components/AppDropdown";
+import ContainerPreviewContainer from "../partials/ContainerPreviewContainer"
 
 export default {
   name: "View_Single_Projekt_Scene",
@@ -44,6 +46,7 @@ export default {
     DesktopScene,
     Slideshow,
     AppDropdown,
+    ContainerPreviewContainer
   },
   mounted() {
     this.$store

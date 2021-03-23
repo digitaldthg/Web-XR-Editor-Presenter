@@ -1,6 +1,5 @@
 <template>
   <div id="slide-container" v-if="this.$store.state.currentSelectedSlideContainer == this.container">
-    SLIDECONTAINER {{this.container.Name}}
     <Slide v-for="slide,idx in this.container.Slides"
     v-bind:key=slide.id
     :slide="slide"

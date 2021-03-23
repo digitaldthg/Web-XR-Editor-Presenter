@@ -1,11 +1,11 @@
 <template>
-  <section class="collection-projekte flex">
+  <section class="collection-projekte flex ">
 
     <template v-if="this.$store.state.projekte.length > 0">
-      <article class="projekt card" v-for="p in this.$store.state.projekte" v-bind:key="p.id">
+      <article class="projekt card pointerOn" v-for="p in this.$store.state.projekte" v-bind:key="p.id">
         <h1>{{p.Name}}</h1>
         <vue-markdown>{{p.Description}}</vue-markdown>
-        <router-link :to="'/projekt/' + p.id">Gehe zum Projekt =></router-link>
+        <router-link :to="'/projekt/presenter/desktop/' + p.id">Gehe zum Projekt =></router-link>
 
         
        

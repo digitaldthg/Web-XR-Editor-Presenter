@@ -6,12 +6,13 @@
     arjs="sourceType: webcam; detectionMode: mono; trackingMethod: best; debugUIEnabled: false;"
     vr-mode-ui="enabled: false"
   >
+  AFRAME Scene
     <a-marker
       class="slide-container"
       v-for="slideContainer in this.$store.state.currentProjekt
         .slide_containers"
       v-bind:key="slideContainer.id"
-      :url="GetPattern(slideContainer.Marker.Marker.url)"
+      :url="GetPattern(slideContainer.Marker)"
       :id="slideContainer.id"
       type="pattern"
       vidhandler
@@ -50,8 +51,11 @@ export default {
       return "targetID:" + id;
     },
     GetPattern(path) {
+      if(path != null){
+       config.CMS_BASE_URL + path.Marker.url
+      }
       //var path = "/uploads/pattern_marker_2fcf84ae6f.patt";
-      return config.CMS_BASE_URL + path;
+      return "";
     },
   },
 };

@@ -2,10 +2,10 @@
   <div id="app">
     <Navigation />
     
-    <main>
+    <main class="pointerOff">
       <router-view></router-view>
     </main>
-    <div id="scene" />
+    <div id="scene" class="pointerOn"/>
   </div>
 </template>
 
@@ -44,11 +44,9 @@ export default {
 <style lang="scss">
 #scene {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
   top:0px;
-}
-main {
-  pointer-events: none;
+  pointer-events: all;
 }
 
 .pointerOn{

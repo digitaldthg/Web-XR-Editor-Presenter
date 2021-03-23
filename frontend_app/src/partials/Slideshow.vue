@@ -1,7 +1,7 @@
 <template>
   <div
     class="slideshow-container pointerOn"
-    v-if="this.$store.state.currentSelectedSlideContainer != null"
+    v-if="this.$store.state.currentSelectedSlideContainer != null && this.$store.state.currentSelectedSlideContainer.Slides.length > 1"
   >
     <button @click="SetSlideIdx(-1)"><Arrow class="svg left" /></button>
     <SlidePreview
