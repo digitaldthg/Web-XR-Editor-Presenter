@@ -4,12 +4,14 @@
     v-if="this.$store.state.currentSelectedSlideContainer != null && this.$store.state.currentSelectedSlideContainer.Slides.length > 1"
   >
     <button @click="SetSlideIdx(-1)"><Arrow class="svg left" /></button>
+    <div class="preview-wrapper">
     <SlidePreview
       v-for="slide in this.$store.state.currentSelectedSlideContainer.Slides"
       v-bind:key="slide.id"
       :slide="slide"
     >
     </SlidePreview>
+    </div>
     <button @click="SetSlideIdx(+1)"><Arrow class="svg right" /></button>
   </div>
 </template>
@@ -59,8 +61,16 @@ fill:$darkGrey
   bottom: 0px;
   width: 100%;
   height: 100px;
-  justify-content: space-between;
   display: flex;
 
+}
+.preview-wrapper{
+  flex:1;
+  display:flex;
+  overflow-x:auto;
+  border:solid 1px;
+  border-radius: 5px;
+  padding:5px;
+  background-color: white;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="collection-projekte flex ">
+  <section class="collection-projekte flex pointerOn">
 
     <template v-if="this.$store.state.projekte.length > 0">
       <article class="projekt card pointerOn" v-for="p in this.$store.state.projekte" v-bind:key="p.id">

@@ -39,11 +39,12 @@ export default {
 @import "../styles/variables.scss";
 .preview {
   height: 100%;
-  width: $slideshow-height;
+  min-width: $slideshow-height;
   background: white;
   border-style: solid;
   overflow: hidden;
   position: relative;
+  margin-right:5px;
 }
 
 .visible-true {
@@ -58,6 +59,7 @@ export default {
   position: absolute;
   top: 5px;
   width: 90px;
+  margin: 5px;
 }
 
 .preview-image {

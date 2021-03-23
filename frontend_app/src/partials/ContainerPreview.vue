@@ -42,6 +42,7 @@ export default {
   background: white;
   border-style: solid;
   margin-bottom: 5px;
+  padding: 5px;
 }
 .visible-true {
   border-width: 5px;

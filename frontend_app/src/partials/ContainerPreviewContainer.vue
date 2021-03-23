@@ -1,5 +1,5 @@
 <template>
-  <div class="container-container">
+  <div class="container-container pointerOn">
     <ContainerPreview
       v-for="container in this.$store.state.currentProjekt.slide_containers"
       v-bind:key="container.id"
@@ -26,7 +26,7 @@ export default {
   position: absolute;
   left: 0px;
   width: 80px;
-  height: 50% ;
+  height: 70% ;
   overflow-y: scroll;
   border: solid 1px;
   border-radius: 5px;

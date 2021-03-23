@@ -153,7 +153,7 @@ export default {
 }
 .menu{
   display: inline-block;
-   z-index: 1;
+   z-index: 2;
    position: relative;
    width:100%;
    height: 100%;
