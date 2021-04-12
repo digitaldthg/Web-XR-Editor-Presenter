@@ -1,4 +1,4 @@
-import webXRScene from '../webxr_package/src/index';
+import webXRScene from '../webxrscene/src/index';
 import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 

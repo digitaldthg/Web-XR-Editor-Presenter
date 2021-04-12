@@ -24,14 +24,14 @@ export default {
 @import "../styles/main.scss";
 .container-container {
   position: absolute;
-  left: 0px;
+  left: 5px;
   width: 80px;
-  height: 70% ;
+  height: 50% ;
   overflow-y: scroll;
   border: solid 1px;
   border-radius: 5px;
   padding:5px;
   background-color:white;
-
+  z-index: 2;
 }
 </style>

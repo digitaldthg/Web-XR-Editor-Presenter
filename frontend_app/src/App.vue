@@ -5,14 +5,12 @@
     <main class="pointerOff main">
       <router-view></router-view>
     </main>
-
-    <div id="scene" class="pointerOn"/>
   </div>
 </template>
 
 <script>
 import "./styles/main.scss";
-import MainScene from "./3DScene/Mainscene";
+
 import Navigation from "./partials/navigation.vue";
 
 export default {
@@ -25,14 +23,6 @@ export default {
 
     this.$store.dispatch("GetProjekte");
 
-    if (this.$store.state.xr == null) {
-      var scene = new MainScene({
-        store: this.$store,
-        domElement: "scene",
-      });
-
-      this.$store.commit("SetMainScene", scene);
-    }
   },
   watch: {
     $route(to, from) {
@@ -43,12 +33,7 @@ export default {
 </script>
 
 <style lang="scss">
-#scene {
-  position: absolute;
-  z-index: 1;
-  top:0px;
-  pointer-events: all;
-}
+
 
 .pointerOn{
 pointer-events: all;
@@ -60,6 +45,5 @@ pointer-events: none;
 
 .main{
   z-index: 2;
-  padding:5px;
 }
 </style>

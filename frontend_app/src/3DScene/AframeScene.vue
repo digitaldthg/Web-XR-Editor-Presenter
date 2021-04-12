@@ -6,7 +6,6 @@
     arjs="sourceType: webcam; detectionMode: mono; trackingMethod: best; debugUIEnabled: false;"
     vr-mode-ui="enabled: false"
   >
-  AFRAME Scene
     <a-marker
       class="slide-container"
       v-for="slideContainer in this.$store.state.currentProjekt

@@ -5,7 +5,7 @@
       <article class="projekt card pointerOn" v-for="p in this.$store.state.projekte" v-bind:key="p.id">
         <h1>{{p.Name}}</h1>
         <vue-markdown>{{p.Description}}</vue-markdown>
-        <router-link :to="'/projekt/presenter/desktop/' + p.id">Gehe zum Projekt =></router-link>
+        <router-link :to="'/projekt/presenter/' + p.id">Gehe zum Projekt =></router-link>
 
         
        

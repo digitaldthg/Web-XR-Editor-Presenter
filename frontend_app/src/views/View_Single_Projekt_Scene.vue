@@ -1,57 +1,56 @@
 <template>
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
-    <h1>{{ this.$store.state.currentProjekt.Name }} in {{this.$route.params.mode}} als {{this.$route.params.role}}</h1>
-    <ContainerPreviewContainer  v-if="this.$route.params.role != 'visitor'"/>
-    <!--<AppDropdown
-    v-if="this.$route.params.role != 'visitor'"
-      color="white"
-      placeholder="Select a marker"
-      :options="GetOptions()"
-      @callback="SetContainer"
-    />
+    <h1>
+      {{ this.$store.state.currentProjekt.Name }} als
+      {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
+    </h1>
+    <div class="button-wrapper pointerOn">
+      <button @click="SetViewMode('Desktop')">Desktop</button>
+      <div @click="SetViewMode('VR')">
+        <div ref="placeholderVRButton"></div>
+      </div>
+      <div @click="SetViewMode('AR')">
+        <div ref="placeholderARButton"></div>
+      </div>
+      <button @click="SetViewMode('AR_Marker')">AR mit Marker</button>
     </div>
-    <div
-      v-for="slideContainer in this.$store.state.currentProjekt
-        .slide_containers"
-      v-bind:key="slideContainer.id"
-    >
-    <AppDropdown/>
-      <button
-        :class="'tracked-' + GetTrackingState(slideContainer.id)"
-        @click="SetSelected(slideContainer)"
-      >
-        {{ slideContainer.Name }} (id: {{ slideContainer.id }},
-        {{ slideContainer.Marker.Marker.name }}, selected:
-        {{ GetSelectedState(slideContainer) }})
-      </button>
-    </div>-->
-    <AframeScene v-if="this.$route.params.mode == 'ar'" />
-    <DesktopScene v-if="this.$route.params.mode == 'desktop'" />
-    <Slideshow v-if="this.$route.params.role != 'visitor'"/>
+    <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
+
+    <AframeScene v-if="this.$store.state.viewMode == 'AR_Marker'" />
+    <WebXRScene v-if="this.$store.state.viewMode != 'AR_Marker'" />
+    <Slideshow v-if="this.$route.params.role != 'visitor'" />
   </div>
 </template>
 
 <script>
 import config from "../main.config";
 import AframeScene from "../3DScene/AframeScene";
-import DesktopScene from "../3DScene/DesktopScene";
+import WebXRScene from "../3DScene/WebXRScene";
 import Slideshow from "../partials/Slideshow";
 import AppDropdown from "../components/AppDropdown";
-import ContainerPreviewContainer from "../partials/ContainerPreviewContainer"
+import ContainerPreviewContainer from "../partials/ContainerPreviewContainer";
 
 export default {
   name: "View_Single_Projekt_Scene",
   components: {
     AframeScene,
-    DesktopScene,
+    WebXRScene,
     Slideshow,
     AppDropdown,
-    ContainerPreviewContainer
+    ContainerPreviewContainer,
   },
   mounted() {
     this.$store
       .dispatch("GetSingleProjekt", this.$route.params.id)
       .then(this.Init);
+  },
+  watch: {
+    "$store.state.mainScene": function(){
+      if(this.$store.state.mainScene!=null){
+        this.$refs.placeholderVRButton.appendChild(this.$store.state.mainScene.xr.Controls.GetVRButton());
+        this.$refs.placeholderARButton.appendChild(this.$store.state.mainScene.xr.Controls.GetARButton());
+      }
+    },
   },
   data() {
     return {
@@ -63,6 +62,9 @@ export default {
     SetContainer(container) {
       console.log("CONTAINER: ", container);
       this.$store.commit("SetSelectedSlideContainer", container);
+    },
+    SetViewMode(mode) {
+      this.$store.commit("SetViewMode", mode);
     },
     GetOptions() {
       var options = [{ value: "None", id: null }];
@@ -147,16 +149,22 @@ export default {
 };
 </script>
 
-<style>
-.dropdown-container{
-  position:absolute;
+<style scoped>
+button {
+  margin-right: 5px;
 }
-.menu{
+.button-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+  z-index: 2;
+}
+.menu {
   display: inline-block;
-   z-index: 2;
-   position: relative;
-   width:100%;
-   height: 100%;
+  z-index: 2;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 50px 5px 5px 5px;
 }
 .tracked-true {
   background: #899da4;

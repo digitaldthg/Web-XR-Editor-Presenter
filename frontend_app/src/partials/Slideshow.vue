@@ -1,16 +1,19 @@
 <template>
   <div
     class="slideshow-container pointerOn"
-    v-if="this.$store.state.currentSelectedSlideContainer != null && this.$store.state.currentSelectedSlideContainer.Slides.length > 1"
+    v-if="
+      this.$store.state.currentSelectedSlideContainer != null &&
+      this.$store.state.currentSelectedSlideContainer.Slides.length > 1
+    "
   >
     <button @click="SetSlideIdx(-1)"><Arrow class="svg left" /></button>
     <div class="preview-wrapper">
-    <SlidePreview
-      v-for="slide in this.$store.state.currentSelectedSlideContainer.Slides"
-      v-bind:key="slide.id"
-      :slide="slide"
-    >
-    </SlidePreview>
+      <SlidePreview
+        v-for="slide in this.$store.state.currentSelectedSlideContainer.Slides"
+        v-bind:key="slide.id"
+        :slide="slide"
+      >
+      </SlidePreview>
     </div>
     <button @click="SetSlideIdx(+1)"><Arrow class="svg right" /></button>
   </div>
@@ -47,30 +50,30 @@ button {
 }
 .svg {
   width: 50px;
-fill:$darkGrey
+  fill: $darkGrey;
 }
 .left {
-    transform: rotate(90deg);
-  }
-  .right {
-    transform: rotate(-90deg);
-  }
+  transform: rotate(90deg);
+}
+.right {
+  transform: rotate(-90deg);
+}
 
 .slideshow-container {
   position: absolute;
-  bottom: 0px;
+  bottom: 5px;
   width: 100%;
   height: 100px;
   display: flex;
-
+  z-index: 2;
 }
-.preview-wrapper{
-  flex:1;
-  display:flex;
-  overflow-x:auto;
-  border:solid 1px;
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  border: solid 1px;
   border-radius: 5px;
-  padding:5px;
+  padding: 5px;
   background-color: white;
 }
 </style>
