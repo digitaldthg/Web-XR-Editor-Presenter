@@ -21,7 +21,7 @@ export const store = new Vuex.Store({
     currentSelectedSlideContainer: null,
     mainScene: null,
     viewMode: 'Desktop',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE0NjA4ODgwLCJleHAiOjE2MTcyMDA4ODB9.K7qxIMON4zlL6nHHHz_Z6oSH9nw9ROK3nMNURdD9xR8'
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4MzAxNTU1LCJleHAiOjE2MjA4OTM1NTV9.oRC9b4h3Vy2sr3XUvLk8e0scJ-e3itwvlCaPbmSxwLY'
   },
   actions: {
     GetProjekte({ commit }) {

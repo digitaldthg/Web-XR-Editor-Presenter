@@ -45,10 +45,14 @@ export default {
       .then(this.Init);
   },
   watch: {
-    "$store.state.mainScene": function(){
-      if(this.$store.state.mainScene!=null){
-        this.$refs.placeholderVRButton.appendChild(this.$store.state.mainScene.xr.Controls.GetVRButton());
-        this.$refs.placeholderARButton.appendChild(this.$store.state.mainScene.xr.Controls.GetARButton());
+    "$store.state.mainScene": function () {
+      if (this.$store.state.mainScene != null) {
+        this.$refs.placeholderVRButton.appendChild(
+          this.$store.state.mainScene.xr.Controls.GetVRButton()
+        );
+        this.$refs.placeholderARButton.appendChild(
+          this.$store.state.mainScene.xr.Controls.GetARButton()
+        );
       }
     },
   },
@@ -105,21 +109,23 @@ export default {
       return this.$store.state.currentSelectedSlideContainer == container;
     },
     Init() {
-      var projekt = this.$store.state.currentProjekt;
+      /*var projekt = this.$store.state.currentProjekt;
       var objectsToLoad = this.ExtractModelsFromProjekt(projekt);
-
-      console.log(projekt);
-      console.log("objectsToLoad", objectsToLoad);
 
       var loadObj = Object.keys(objectsToLoad).map((id) => {
         var obj = objectsToLoad[id];
+        console.log("Objects to load: ", obj.element.Type.Type);
+        var url = null;
+        if (obj.element.Type.Type == "Object3D") {
+          url = config.CMS_BASE_URL + obj.element.Asset.url
+        }
         return {
-          name: obj.id,
-          url: config.CMS_BASE_URL + obj.element.Asset.url,
-        };
+            name: obj.id,
+            url: url,
+          };
       });
 
-      console.log(loadObj);
+      console.log(loadObj);*/
     },
     loadProgress(progress) {
       this.loading = progress.isLoading;

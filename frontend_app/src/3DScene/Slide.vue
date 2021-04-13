@@ -1,8 +1,6 @@
 <template>
-  <div class="slide">
-    <div v-if="this.order == currentSlideIdx">
-
-    </div>
+  <div class="slide" v-if="this.order == currentSlideIdx">
+    <h2>Slide: {{ this.slide.Name }}</h2>
   </div>
 </template>
 
@@ -24,37 +22,88 @@ export default {
   data() {
     return {
       library: null,
+      slideElements: null,
     };
   },
   methods: {
-    AddElements() {
-      Object.values(this.library).forEach((element) => {
+    AddAllElements() {
+      Object.values(this.slideElements).forEach((element) => {
+        console.log(element)
+        if (element.Offset != null) {
+          element.scene.position.set(
+            element.Offset.x,
+            element.Offset.y,
+            element.Offset.z
+          );
+        }
+
+        if(element.Rotation != null){
+          element.scene.quaternion.set(
+            element.Rotation.x,
+            element.Rotation.y,
+            element.Rotation.z,
+            element.Rotation.w,
+          );
+        }
+
+        if(element.Scale != null){
+          element.scene.scale.set(
+            element.Scale.x,
+            element.Scale.y,
+            element.Scale.z,
+          );
+        }
+
         this.$store.state.mainScene.xr.Scene.add(element.scene);
       });
     },
-    RemoveElements() {
-      Object.values(this.library).forEach((element) => {
 
+    RemoveAllElements() {
+      Object.values(this.slideElements).forEach((element) => {
         this.$store.state.mainScene.xr.Scene.remove(element.scene);
       });
     },
   },
   mounted() {
-    if (this.library != null) {
+    if (this.slideElements != null) {
       return;
     }
 
-    var stack = [];
-    this.slide.SlideElements.forEach((element) => {
-      stack.push({
-        url: config.CMS_BASE_URL + element.element.Asset.url,
-        name: element.element.Name,
-      });
+    var gltfStack = [];
+    var object3dStack = [];
+    var primitivesStack = [];
+
+    this.slide.SlideElements.forEach((slideElement) => {
+      if (slideElement.element.Type.Type == "Object3D") {
+        gltfStack.push({
+          url: config.CMS_BASE_URL + slideElement.element.Asset.url,
+          name: slideElement.element.Name,
+        });
+        object3dStack.push(slideElement);
+      } else if (slideElement.element.Type.Type == "Primitive") {
+        primitivesStack.push(slideElement);
+      }
     });
-    this.$store.state.mainScene.LoadStack(stack).then((library) => {
+
+    this.slideElements = this.$store.state.mainScene.LoadPrimitives(
+      primitivesStack
+    );
+
+    this.$store.state.mainScene.LoadStack(gltfStack).then((library) => {
       this.library = library;
+      object3dStack.forEach((slideElem) => {
+        this.slideElements[slideElem.id] = slideElem;
+        this.slideElements[slideElem.id].scene =
+          library[slideElem.element.Name].scene;
+        console.log(
+          "Create gltf element for slide: ",
+          this.slide.Name,
+          this.slideElements[slideElem.id]
+        );
+      });
+
       if (this.$store.state.currentSlideIdx == this.order) {
-        this.AddElements();
+        this.AddAllElements();
       }
     });
 
@@ -62,20 +111,29 @@ export default {
       (state) => state.currentSlideIdx,
       (newValue, oldValue) => {
         if (oldValue == this.order) {
-          this.RemoveElements();
-        } else if (newValue == this.order) {
-          this.AddElements();
+          this.RemoveAllElements();
+        } else if (newValue == this.order && this.slideElements != null) {
+          this.AddAllElements();
         }
       }
     );
   },
   destroyed() {
-      console.log("Destory: ",this.order, " ",this.$store.state.currentSlideIdx)
-      this.RemoveElements();
-
+    console.log(
+      "Destory: ",
+      this.order,
+      " ",
+      this.$store.state.currentSlideIdx
+    );
+    this.RemoveAllElements();
   },
 };
 </script>
 
-<style>
+<style scopes lang="scss">
+.slide {
+  position: absolute;
+  right: 0;
+  top: 120px;
+}
 </style>

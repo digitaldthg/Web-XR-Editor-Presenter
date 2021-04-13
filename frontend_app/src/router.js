@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import View_Home from './views/View_Home.vue';
 import View_Projekte from './views/View_Projekte.vue';
-import View_Single_Projekt from './views/View_Single_Projekt.vue';
 import View_Single_Projekt_Scene from './views/View_Single_Projekt_Scene.vue';
 
 Vue.use(VueRouter)
