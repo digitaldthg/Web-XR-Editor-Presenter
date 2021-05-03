@@ -1,5 +1,5 @@
 <template>
-  <div class="container-container pointerOn">
+  <div id="ContainerPreview" class="container-container pointerOn" >
     <ContainerPreview
       v-for="container in this.$store.state.currentProjekt.slide_containers"
       v-bind:key="container.id"

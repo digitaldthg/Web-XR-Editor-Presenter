@@ -54,13 +54,13 @@ export default {
           );
         }
 
-        this.$store.state.mainScene.xr.Scene.add(element.scene);
+        this.$store.state.mainScene.rootGroup.add(element.scene);
       });
     },
 
     RemoveAllElements() {
       Object.values(this.slideElements).forEach((element) => {
-        this.$store.state.mainScene.xr.Scene.remove(element.scene);
+        this.$store.state.mainScene.rootGroup.remove(element.scene);
       });
     },
   },

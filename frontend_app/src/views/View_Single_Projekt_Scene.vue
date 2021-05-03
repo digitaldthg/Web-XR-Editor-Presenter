@@ -1,5 +1,9 @@
 <template>
-  <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
+  <div
+    id="slide-menu"
+    class="menu pointerOff"
+    v-if="this.$store.state.currentProjekt != null"
+  >
     <h1>
       {{ this.$store.state.currentProjekt.Name }} als
       {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
@@ -12,7 +16,9 @@
       <div @click="SetViewMode('AR')">
         <div ref="placeholderARButton"></div>
       </div>
-      <button @click="SetViewMode('AR_Marker')">AR mit Marker</button>
+      <button @click="ActivateTransform">Ursprung verschieben</button>
+      <button @click="ActivatePlaneDetection">Oberfläche finden</button>
+      <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
     </div>
     <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
 
@@ -51,7 +57,7 @@ export default {
           this.$store.state.mainScene.xr.Controls.GetVRButton()
         );
         this.$refs.placeholderARButton.appendChild(
-          this.$store.state.mainScene.xr.Controls.GetARButton()
+          this.$store.state.mainScene.xr.Controls.arButton.GetButton()
         );
       }
     },
@@ -63,11 +69,18 @@ export default {
     };
   },
   methods: {
+    ActivatePlaneDetection() {
+      this.$store.commit("SetTrackingActive",true)
+    },
+    ActivateTransform() {
+      this.$store.commit("SetTransformActive");
+    },
     SetContainer(container) {
       console.log("CONTAINER: ", container);
       this.$store.commit("SetSelectedSlideContainer", container);
     },
     SetViewMode(mode) {
+      //this.$store.state.mainScene.xr.Controls.arButton.SetDomOverlay(document.getElementById('ContainerPreview'));
       this.$store.commit("SetViewMode", mode);
     },
     GetOptions() {

@@ -3,7 +3,8 @@
     :class="'preview pointerOn visible-' + CheckVisibility()"
     @click="SetContainer(container)"
   >
-    {{ container.Name }}
+    <img class="preview-image" v-if="container.PreviewImage != null" :src="this.GetImageUrl(container.PreviewImage)"/>
+    <div class="title-text">{{ container.Name }}</div>
   </div>
 </template> 
 
@@ -16,6 +17,9 @@ export default {
   },
 
   methods: {
+    GetImageUrl(path) {
+      return config.CMS_BASE_URL  + path.url;
+    },
     SetContainer(container) {
       console.log("CONTAINER: ", container);
       this.$store.commit("SetSelectedSlideContainer", container);
@@ -43,6 +47,7 @@ export default {
   border-style: solid;
   margin-bottom: 5px;
   padding: 5px;
+  position: relative;
 }
 .visible-true {
   border-width: 5px;
@@ -50,5 +55,14 @@ export default {
 
 .visible-false {
   border-width: 1px;
+}
+
+.title-text {
+  position: absolute;
+  top:0px;
+}
+.preview-image {
+  width:100%;
+  //position: absolute;
 }
 </style>

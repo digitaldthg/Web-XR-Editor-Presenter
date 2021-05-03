@@ -63,7 +63,7 @@ export default {
 }
 
 .preview-image {
-  //background-image: --img-url;
-  //background-size: cover;
+  width:100%;
+  position: absolute;
 }
 </style>
