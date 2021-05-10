@@ -16,6 +16,11 @@ export default {
   name : "View_Projekte",
   mounted(){
     console.log("projekte", this.$store.state.projekte);
+    if(this.$store.state.jwt == null){
+      this.$router.push('/Login')
+    }else{
+      this.$store.dispatch("GetProjekte");
+    }
 
   }
 }

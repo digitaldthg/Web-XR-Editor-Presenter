@@ -52,6 +52,7 @@ class MainScene {
     this.xr.Scene.add(this.rootGroup);
 
     this.control = new TransformControls(this.xr.Camera.instance, document.getElementById(this.domElement));
+    this.control.scale.set(100,100,100)
 
     this.control.addEventListener('dragging-changed', (event) => {
       console.log("DRAGGING CHANGED ", event)
@@ -68,7 +69,7 @@ class MainScene {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x55ff99 });
     this.cube = new THREE.Mesh(geometry, material);
-    this.rootGroup.add(this.cube);
+    //this.rootGroup.add(this.cube);
     this.xr.Controls.arButton.SetRootElement(this.rootGroup);
 
     this.store.watch(
