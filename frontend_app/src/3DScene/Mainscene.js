@@ -1,7 +1,10 @@
 import webXRScene from '../webxrscene/src/index';
-import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import ThreeMeshUI from 'three-mesh-ui';
+import textJson from '../assets/Roboto-msdf.json';
+import * as textPng from '@/assets/Roboto-msdf.png';
+
 
 
 class MainScene {
@@ -19,7 +22,10 @@ class MainScene {
   }
   Init() {
     this.xr.Controls.SetPosition(0, 2, 30);
-    console.log("Context ",this.xr.Controls.context)
+    this.xr.Camera
+    console.log("Camera ",this.xr.Camera)
+
+    console.log("TEXT PNG ",textPng)
 
     const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(0, 2, 0);
@@ -27,6 +33,7 @@ class MainScene {
     this.CreatePrimitives();
     //this.xr.Controls.arButton.SetDomOverlay(document.getElementById('ContainerPreview'));
     this.xr.Controls.arButton.SetDomOverlay(document.getElementById('slide-menu'));
+    //this.xr.Controls.arButton.SetDomOverlay(document.getElementById('buttons'));
 
     var geometryRecticle = new THREE.BoxGeometry(0.3, 0.05, 0.3);
     var materialRecticle = new THREE.MeshBasicMaterial({ color: 0xF15C3C66 });
@@ -41,11 +48,14 @@ class MainScene {
     this.xr.Scene.add(this.rootGroup);
 
     this.control = new TransformControls(this.xr.Camera.instance, document.getElementById(this.domElement));
+
     this.control.addEventListener('dragging-changed', (event) => {
       console.log("DRAGGING CHANGED ", event)
       this.xr.Controls.Desktop.instance.enabled = !event.value;
-      console.log("ORBIT DISABLED ", this.xr.Controls.Desktop.instance.enabled)
+      this.xr.Controls.Desktop.orbit.enabled = !event.value;
+      console.log("ORBIT enabled ", this.xr.Controls.Desktop.instance.enabled)
     });
+
     this.control.attach(this.rootGroup);
     this.control.visible = this.store.state.transformActive;
 
@@ -70,13 +80,20 @@ class MainScene {
         this.xr.Controls.arButton.SetTrackingActive(newValue);
       }
     );
-  
+
+    this.xr.Events.addEventListener("OnChangeXRView", (mode) => {
+      this.store.commit("SetViewMode", mode.xrMode);
+    })
 
     this.xr.Events.registerEvent("OnObjectPlacedOnPlane");
-    this.xr.Events.addEventListener("OnObjectPlacedOnPlane",()=>{
+    this.xr.Events.addEventListener("OnObjectPlacedOnPlane", () => {
       console.log("Object Placed")
-      this.store.commit("SetTrackingActive",false)
+      this.store.commit("SetTrackingActive", false)
     });
+
+    this.xr.Events.addEventListener("OnAnimationLoop",()=>{
+      ThreeMeshUI.update();
+    })
   }
 
   CreatePrimitives() {
@@ -97,6 +114,17 @@ class MainScene {
     })
   }
 
+  LoadText(stack) {
+    var textObjects = {};
+    stack.forEach(slideElement => {
+      var text = this.CreateTextElement(slideElement);
+
+      textObjects[slideElement.id] = slideElement;
+      textObjects[slideElement.id].scene = text;
+    });
+    return textObjects;
+  }
+
   LoadPrimitives(stack) {
     var primitives = {};
     stack.forEach(slideElement => {
@@ -105,6 +133,32 @@ class MainScene {
     });
     return primitives;
   }
+
+  CreateTextElement(slideElement) {
+    var settings = slideElement.element.FontSettings;
+    const container = new ThreeMeshUI.Block({
+      height: settings.Height != null ? settings.Height : 2.5,
+      width:  settings.Width!= null ? settings.Width : 4,
+      padding: settings.Padding != null ? settings.Padding: .2,
+      backgroundOpacity: settings.BackgroundOpacity != null ? settings.BackgroundOpacity : 1,
+      backgroundColor:settings.BackgroundColor != null ? new THREE.Color(settings.BackgroundColor) :  new THREE.Color( 0xaaaaaa ),
+      alignContent : settings.Alignment != null ? settings.Alignment : "left",
+      justifyContent: settings.Justification != null ? settings.Justification : "center",
+      interLine : settings.LineHeight != null ? settings.LineHeight * .01 : .01  
+    });
+
+    const Text = new ThreeMeshUI.Text({
+        content: settings.Content != null ? settings.Content : "Default Text",
+        fontColor: settings.Color != null ? new THREE.Color(settings.Color) : new THREE.Color( 0x000000),
+        fontSize: settings.FontSize != null ? settings.FontSize * .5 : .5,
+        fontFamily: textJson,
+        fontTexture: textPng,
+      });
+
+    container.add(Text);
+    return container;
+  }
+
 
 
   GetVRButton() {

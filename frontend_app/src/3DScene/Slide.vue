@@ -1,7 +1,5 @@
 <template>
-  <div class="slide" v-if="this.order == currentSlideIdx">
-    <h2>Slide: {{ this.slide.Name }}</h2>
-  </div>
+  <div class="slide" v-if="this.order == currentSlideIdx"></div>
 </template>
 
 <script>
@@ -28,7 +26,7 @@ export default {
   methods: {
     AddAllElements() {
       Object.values(this.slideElements).forEach((element) => {
-        console.log(element)
+        
         if (element.Offset != null) {
           element.scene.position.set(
             element.Offset.x,
@@ -37,25 +35,26 @@ export default {
           );
         }
 
-        if(element.Rotation != null){
+        if (element.Rotation != null) {
           element.scene.quaternion.set(
             element.Rotation.x,
             element.Rotation.y,
             element.Rotation.z,
-            element.Rotation.w,
+            element.Rotation.w
           );
         }
 
-        if(element.Scale != null){
+        if (element.Scale != null) {
           element.scene.scale.set(
             element.Scale.x,
             element.Scale.y,
-            element.Scale.z,
+            element.Scale.z
           );
         }
-
+        console.log("SlideElement: ",element);
         this.$store.state.mainScene.rootGroup.add(element.scene);
       });
+      console.log("Root Group ",this.$store.state.mainScene.rootGroup)
     },
 
     RemoveAllElements() {
@@ -71,7 +70,9 @@ export default {
 
     var gltfStack = [];
     var object3dStack = [];
+
     var primitivesStack = [];
+    var textStack = [];
 
     this.slide.SlideElements.forEach((slideElement) => {
       if (slideElement.element.Type.Type == "Object3D") {
@@ -82,12 +83,18 @@ export default {
         object3dStack.push(slideElement);
       } else if (slideElement.element.Type.Type == "Primitive") {
         primitivesStack.push(slideElement);
+      } else if (slideElement.element.Type.Type == "Text") {
+        textStack.push(slideElement);
       }
     });
 
     this.slideElements = this.$store.state.mainScene.LoadPrimitives(
       primitivesStack
     );
+
+    var textSlideElements = this.$store.state.mainScene.LoadText(textStack);
+
+    Object.assign(this.slideElements, textSlideElements);
 
     this.$store.state.mainScene.LoadStack(gltfStack).then((library) => {
       this.library = library;

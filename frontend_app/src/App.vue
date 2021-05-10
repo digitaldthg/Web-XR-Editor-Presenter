@@ -45,5 +45,8 @@ pointer-events: none;
 
 .main{
   z-index: 2;
+  position: fixed;
+  top: $navigation-height;
+  left:0px;
 }
 </style>

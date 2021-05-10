@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
       state.transformActive = !state.transformActive;
     },
     SetTrackingActive(state,mode){
-      console.log("Set Tracking Active ",mode)
+      console.log("Set Tracking Active ", mode)
       state.planeDetectionActive = mode;
     }
   }

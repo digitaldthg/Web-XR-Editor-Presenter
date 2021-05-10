@@ -1,4 +1,6 @@
 <template>
+<div>
+  <h4>Szenen:</h4>
   <div id="ContainerPreview" class="container-container pointerOn" >
     <ContainerPreview
       v-for="container in this.$store.state.currentProjekt.slide_containers"
@@ -6,6 +8,7 @@
       :container="container"
     />
   </div>
+</div>
 </template>
 
 <script>
@@ -26,12 +29,11 @@ export default {
   position: absolute;
   left: 5px;
   width: 80px;
-  height: 50% ;
   overflow-y: scroll;
   border: solid 1px;
   border-radius: 5px;
   padding:5px;
-  background-color:white;
+  background-color:#eee;
   z-index: 2;
 }
 </style>

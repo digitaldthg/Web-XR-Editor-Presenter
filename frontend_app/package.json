@@ -21,6 +21,7 @@
     "postprocessing": "^6.20.3",
     "promise-polyfill": "^8.2.0",
     "three": "^0.120.1",
+    "url-loader": "^2.3.0",
     "vue": "^2.6.11",
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.5.1",
@@ -41,6 +42,7 @@
     "sass-loader": "^10.1.1",
     "stylus": "^0.54.8",
     "stylus-loader": "^4.3.3",
+    "three-mesh-ui": "^4.6.1",
     "three-transform-controls": "^1.0.4",
     "vue-cli-plugin-styleguidist": "~4.35.0",
     "vue-template-compiler": "^2.6.11"
