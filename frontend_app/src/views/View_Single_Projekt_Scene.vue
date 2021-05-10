@@ -1,48 +1,41 @@
 <template>
+<div class="wrapper">
   <div
-    
+    id="slide-menu"
     class="menu pointerOff"
     v-if="this.$store.state.currentProjekt != null"
   >
-  <div id="slide-menu">
-    <div class="wrapper button-wrapper pointerOn" >
-      <h1>
-        {{ this.$store.state.currentProjekt.Name }} als
-        {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
-      </h1>
-      <h4>Ausspielungsarten:</h4>
-      <!--<div @click="SetViewMode('VR')">
-        <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
-      </div>-->
-
-      <div @click="SetViewMode('AR')">
-        <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
-      </div>
+  <div class="toolbar pointerOn">
+    <div class="toolbar-item" @click="SetViewMode('AR')">
+      <div ref="placeholderARButton"></div>
     </div>
 
-    <div class="wrapper button-wrapper pointerOn">
-      <h4>Aktionen:</h4>
-      <div>
-        <button
-          :class="'cta-button --active-' + this.$store.state.transformActive"
-          @click="ActivateTransform"
-        >
-          Ursprung verschieben
-        </button>
-      </div>
-      <div>
-        <button
-          v-if="this.$store.state.viewMode == 'AR'"
-          :class="
-            'cta-button --active-' + this.$store.state.planeDetectionActive
-          "
-          @mouseup="ActivatePlaneDetection"
-        >
-          Oberfläche finden
-        </button>
-      </div>
-      <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
+    <!-- <div @click="SetViewMode('VR')">
+      <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
+    </div> -->
+
+    <button
+      :class="'cta-button --active-' + this.$store.state.transformActive"
+      @click="ActivateTransform"
+    >Ursprung verschieben</button>
+    
+    <button
+      v-if="this.$store.state.viewMode == 'AR'"
+      :class="
+        'cta-button --active-' + this.$store.state.planeDetectionActive
+      "
+      @mouseup="ActivatePlaneDetection"
+    >
+      Oberfläche finden
+    </button>
+
+  </div>
+
+    <div class="project-meta">
+      <h1>{{ this.$store.state.currentProjekt.Name }}</h1>
     </div>
+
+
     <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
     <Slideshow v-if="this.$route.params.role != 'visitor'" />
   </div>
@@ -228,21 +221,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.wrapper{
+  width:100%;
+  height:100%;
+  position: relative
+}
+
+
+.Project-meta {
+  padding: 1rem;
+  left: 1rem;
+  position: relative;
+  top: 1rem;
+  width: 300px;
+  box-shadow: 0 0 0.5rem 0 rgb(0,0,0,.2);
+  border-radius: 5px;
+  background: #fff;
+}
+
+
 .button-wrapper {
   position: relative;
   margin-bottom: 1rem;
   z-index: 2;
 }
-.menu {
-  display: inline-block;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  padding: 50px 5px 5px 5px;
-  left: 0px;
-  top: 0px;
-}
+
 .tracked-true {
   background: #899da4;
 }
@@ -277,4 +281,14 @@ export default {
   align-items: center;
   color: #fff;
 }
+
+.toolbar {
+  position: relative;
+  z-index: 3;
+  background: #eee;
+  padding: 0.5rem;
+    display: flex;
+  justify-content: space-between;
+}
+
 </style>

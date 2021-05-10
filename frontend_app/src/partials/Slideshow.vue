@@ -39,43 +39,6 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
 @import "../styles/main.scss";
-button {
-  width: 100px;
-  height: 100%;
-  border: none;
-  background: transparent;
-  outline: 0;
-  margin: 0;
-  padding: 0;
-}
-.svg {
-  width: 50px;
-  fill: $darkGrey;
-}
-.left {
-  transform: rotate(90deg);
-}
-.right {
-  transform: rotate(-90deg);
-}
 
-.slideshow-container {
-  position: absolute;
-  bottom: 5px;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  z-index: 2;
 
-}
-.preview-wrapper {
-  flex: 1;
-  display: flex;
-  overflow-x: auto;
-  border: solid 1px;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: white;
-  background-color: #eee;
-}
 </style>

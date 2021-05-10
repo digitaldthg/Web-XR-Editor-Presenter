@@ -1,10 +1,11 @@
 <template>
   <div class="scene-wrapper">
     <div id="scene" class="pointerOn"/>
-    <SlideContainer v-for="slideContainer in this.$store.state.currentProjekt
-        .slide_containers"
+    <template v-if="$store.state.currentProjekt != null">
+    <SlideContainer v-for="slideContainer in $store.state.currentProjekt.slide_containers"
         v-bind:key="slideContainer.id"
         :container="slideContainer"/>
+    </template>
   </div>
 </template>
 

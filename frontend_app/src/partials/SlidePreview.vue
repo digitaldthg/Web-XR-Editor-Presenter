@@ -56,12 +56,7 @@ export default {
   border-width: 1px;
 }
 
-.title-text {
-  position: absolute;
-  top: 5px;
-  width: 90px;
-  margin: 5px;
-}
+
 
 .preview-image {
   width:100%;

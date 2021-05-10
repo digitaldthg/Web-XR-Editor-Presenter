@@ -1,17 +1,53 @@
 @import "./resets/reset.scss";
 @import "./resets/custom_reset.scss";
 
-
 @import "./typography.scss";
 @import "./flex.scss";
 @import "./layout.scss";
+@import "./slideshow.scss";
 @import "./card.scss";
 
-
-$darkGrey : #2c3e50;
+body{
+  
+}
 #app {
   width:100%;
   height:100%;
   color: $darkGrey;
   position: relative;
+}
+
+.menu {
+  height: 100%;
+  position: relative;
+  z-index: 99;
+}
+
+.project-meta {
+  padding: 1rem;
+  background: #fff;
+  max-width: 300px;
+  border-radius: 5px;
+  top: 1rem;
+  left: 1rem;
+  position: relative;
+}
+
+.slideshow-link {
+  background: #fff;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 80%;
+  position: relative;
+}
+
+.title-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff66;
+  height: 100%;
+  padding: 0.5rem;
 }

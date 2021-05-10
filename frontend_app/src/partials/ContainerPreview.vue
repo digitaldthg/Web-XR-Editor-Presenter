@@ -40,30 +40,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/variables.scss";
-.preview {
-  width: 100%;
-  height: 70px;
-  background: white;
-  border-style: solid;
-  margin-bottom: 5px;
-  padding: 5px;
-  position: relative;
-  border-radius: 5px;
-}
-.visible-true {
-  border-width: 5px;
-}
 
-.visible-false {
-  border-width: 1px;
-}
 
-.title-text {
-  position: absolute;
-  top:0px;
-}
-.preview-image {
-  width:100%;
-  //position: absolute;
-}
 </style>

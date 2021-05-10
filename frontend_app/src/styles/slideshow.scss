@@ -1,0 +1,50 @@
+//@import url("./variables.scss");
+
+button {
+  width: 100px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}
+.svg {
+  width: 50px;
+  fill:#2c3e50;
+}
+.left {
+  transform: rotate(90deg);
+}
+.right {
+  transform: rotate(-90deg);
+}
+
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: .5rem;
+
+  font-size: 80%;
+
+  .title-text{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+}
+
+.slideshow-container{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.slideshow-container button {
+  padding: 1rem;
+}

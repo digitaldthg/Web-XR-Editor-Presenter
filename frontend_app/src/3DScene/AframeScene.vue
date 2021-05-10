@@ -8,8 +8,7 @@
   >
     <a-marker
       class="slide-container"
-      v-for="slideContainer in this.$store.state.currentProjekt
-        .slide_containers"
+      v-for="slideContainer in this.$store.state.currentProjekt.slide_containers"
       v-bind:key="slideContainer.id"
       :url="GetPattern(slideContainer.Marker)"
       :id="slideContainer.id"

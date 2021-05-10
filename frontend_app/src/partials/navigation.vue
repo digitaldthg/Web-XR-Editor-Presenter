@@ -14,7 +14,8 @@ export default {
 <style lang="scss">
 @import "../styles/variables";
   nav{
-    background: white;
+    background: $custom-blue;
+    color:#fff;
     width:100%;
     height: $navigation-height;
     display: flex;
@@ -25,5 +26,10 @@ export default {
     left:0;
     right:0;
     z-index: 9;
+    box-shadow: 0 0 0.4rem 0 rgb(0 0 0);
+    
+    a{
+      color : #fff;
+    }
   }
 </style>

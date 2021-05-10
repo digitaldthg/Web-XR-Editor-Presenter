@@ -36,7 +36,10 @@ export default {
 
 
 .pointerOn{
-pointer-events: all;
+  pointer-events: all;
+  *{
+    pointer-events: all;
+  }
 }
 
 .pointerOff{
