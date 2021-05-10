@@ -35,10 +35,12 @@ class MainScene {
     this.xr.Controls.arButton.SetDomOverlay(document.getElementById('slide-menu'));
     //this.xr.Controls.arButton.SetDomOverlay(document.getElementById('buttons'));
 
-    var geometryRecticle = new THREE.BoxGeometry(0.3, 0.05, 0.3);
-    var materialRecticle = new THREE.MeshBasicMaterial({ color: 0xF15C3C66 });
+    var geometryRecticle = new THREE.PlaneBufferGeometry(.5,.5,32,32);
+    var materialRecticle = new THREE.MeshBasicMaterial({ color: 0xF15C3C, side : THREE.DoubleSide });
     this.reticle = new THREE.Mesh(geometryRecticle, materialRecticle);
+    this.reticle.rotation.x = 90 * Math.PI / 180;
     this.reticle.visible = false;
+    this.reticle.matrixAutoUpdate = true;
     this.xr.Controls.arButton.SetReticle(this.reticle);
 
     this.xr.Scene.add(this.reticle);
