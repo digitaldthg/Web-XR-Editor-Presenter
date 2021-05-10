@@ -1,18 +1,19 @@
 <template>
   <div
-    id="slide-menu"
+    
     class="menu pointerOff"
     v-if="this.$store.state.currentProjekt != null"
   >
-    <div class="wrapper button-wrapper pointerOn">
+  <div id="slide-menu">
+    <div class="wrapper button-wrapper pointerOn" >
       <h1>
         {{ this.$store.state.currentProjekt.Name }} als
         {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
       </h1>
       <h4>Ausspielungsarten:</h4>
-      <div @click="SetViewMode('VR')">
+      <!--<div @click="SetViewMode('VR')">
         <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
-      </div>
+      </div>-->
 
       <div @click="SetViewMode('AR')">
         <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
@@ -43,10 +44,10 @@
       <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
     </div>
     <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
-
+    <Slideshow v-if="this.$route.params.role != 'visitor'" />
+  </div>
     <AframeScene v-if="this.$store.state.viewMode == 'AR_Marker'" />
     <WebXRScene v-if="this.$store.state.viewMode != 'AR_Marker'" />
-    <Slideshow v-if="this.$route.params.role != 'visitor'" />
   </div>
 </template>
 
@@ -106,7 +107,7 @@ export default {
           );
           this.$store.state.mainScene.xr.Controls.GetVRButton().classList.add(
             "cta-button"
-          );
+          )
         }
 
         if (this.$refs.placeholderARButton != null) {
