@@ -23,9 +23,9 @@ class MainScene {
   Init() {
     this.xr.Controls.SetPosition(0, 2, 30);
     this.xr.Camera
-    console.log("Camera ",this.xr.Camera)
+    console.log("Camera ", this.xr.Camera)
 
-    console.log("TEXT PNG ",textPng)
+    console.log("TEXT PNG ", textPng)
 
     const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(0, 2, 0);
@@ -91,8 +91,14 @@ class MainScene {
       this.store.commit("SetTrackingActive", false)
     });
 
-    this.xr.Events.addEventListener("OnAnimationLoop",()=>{
+    this.xr.Events.addEventListener("OnAnimationLoop", () => {
       ThreeMeshUI.update();
+    })
+
+
+
+    document.addEventListener('fullscreenchange', () => {
+      console.log("FULLSCREEN")
     })
   }
 
@@ -138,22 +144,22 @@ class MainScene {
     var settings = slideElement.element.FontSettings;
     const container = new ThreeMeshUI.Block({
       height: settings.Height != null ? settings.Height : 2.5,
-      width:  settings.Width!= null ? settings.Width : 4,
-      padding: settings.Padding != null ? settings.Padding: .2,
+      width: settings.Width != null ? settings.Width : 4,
+      padding: settings.Padding != null ? settings.Padding : .2,
       backgroundOpacity: settings.BackgroundOpacity != null ? settings.BackgroundOpacity : 1,
-      backgroundColor:settings.BackgroundColor != null ? new THREE.Color(settings.BackgroundColor) :  new THREE.Color( 0xaaaaaa ),
-      alignContent : settings.Alignment != null ? settings.Alignment : "left",
+      backgroundColor: settings.BackgroundColor != null ? new THREE.Color(settings.BackgroundColor) : new THREE.Color(0xaaaaaa),
+      alignContent: settings.Alignment != null ? settings.Alignment : "left",
       justifyContent: settings.Justification != null ? settings.Justification : "center",
-      interLine : settings.LineHeight != null ? settings.LineHeight * .01 : .01  
+      interLine: settings.LineHeight != null ? settings.LineHeight * .01 : .01
     });
 
     const Text = new ThreeMeshUI.Text({
-        content: settings.Content != null ? settings.Content : "Default Text",
-        fontColor: settings.Color != null ? new THREE.Color(settings.Color) : new THREE.Color( 0x000000),
-        fontSize: settings.FontSize != null ? settings.FontSize * .5 : .5,
-        fontFamily: textJson,
-        fontTexture: textPng,
-      });
+      content: settings.Content != null ? settings.Content : "Default Text",
+      fontColor: settings.Color != null ? new THREE.Color(settings.Color) : new THREE.Color(0x000000),
+      fontSize: settings.FontSize != null ? settings.FontSize * .5 : .5,
+      fontFamily: textJson,
+      fontTexture: textPng,
+    });
 
     container.add(Text);
     return container;
