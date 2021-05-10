@@ -2,31 +2,18 @@
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
     <div id="slide-menu">
       <div class="wrapper button-wrapper pointerOn">
-        <h1>
-          {{ this.$store.state.currentProjekt.Name }} als
-          {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
-        </h1>
-        <h4>Ausspielungsarten:</h4>
-        <!--<div @click="SetViewMode('VR')">
-        <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
-      </div>-->
+        <div class="toolbar ">
+           <div @click="SetViewMode('AR')">
+            <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
+          </div>
 
-        <div @click="SetViewMode('AR')">
-          <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
-        </div>
-      </div>
-
-      <div class="wrapper button-wrapper pointerOn">
-        <h4>Aktionen:</h4>
-        <div>
           <button
             :class="'cta-button --active-' + this.$store.state.transformActive"
             @click="ActivateTransform"
           >
             Ursprung verschieben
           </button>
-        </div>
-        <div>
+
           <button
             v-if="this.$store.state.viewMode == 'AR'"
             :class="
@@ -37,8 +24,14 @@
             Oberfläche finden
           </button>
         </div>
-        <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
+        <div class="project-meta">
+        <h1>
+          {{ this.$store.state.currentProjekt.Name }} als
+          {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
+        </h1>
+        </div>       
       </div>
+
       <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
       <Slideshow v-if="this.$route.params.role != 'visitor'" />
     </div>
@@ -221,16 +214,7 @@ export default {
   margin-bottom: 1rem;
   z-index: 2;
 }
-.menu {
-  display: inline-block;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  padding: 50px 5px 5px 5px;
-  left: 0px;
-  top: 0px;
-}
+
 .tracked-true {
   background: #899da4;
 }

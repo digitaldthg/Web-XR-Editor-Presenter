@@ -1,13 +1,21 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link>
     <router-link to="/projekte">Projekte</router-link>
+
+    <button class="cta-button" @click="HandleLogout">Logout</button>
   </nav>
 </template>
 
 <script>
 export default {
-  name : "Navigation"
+  name : "Navigation",
+  methods:{
+    HandleLogout(){
+      this.$route.push({name : "Login"});
+      this.$store.commit('Logout');
+
+    }
+  }
 }
 </script>
 

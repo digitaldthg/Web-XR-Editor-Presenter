@@ -8,6 +8,7 @@ import Utils from './Common/Utils'
 import { store } from './store';
 import axios from 'axios';
 import config from "./main.config.js"
+import IOMixins from './Mixins/IOMixin';
 
 Vue.use(VueRouter)
 
@@ -37,27 +38,44 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const jwtCookie = Utils.GetCookie("jwt");
 
-  if (jwtCookie == null && router.currentRoute.name != "Login") {
-    next({ name: 'Login' })
-  } else if (jwtCookie != null) {
+  console.log(jwtCookie, router.currentRoute.name,to,from );
 
-    store.commit("SetJWT", jwtCookie);
+  if (
+      jwtCookie == null && 
+      to.name != "Login") {
 
+    next({ name: "Login" });
+
+
+    console.log("go to login");
+
+    return;
+  }
+  
+  if(jwtCookie != null && store.state.jwt == null){
+    store.commit("SetJWT" , jwtCookie);
+  }
+  
+  if (jwtCookie != null && store.state.user === null) {
     axios({
       method: "GET",
       url: config.CMS_BASE_URL + "/users/me",
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${store.state.jwt}`
+        'Authorization': `Bearer ${jwtCookie}`
       }
     }).then((response) => {
+      
       store.commit("SetUser", response.data);
+    
       next()
     });
 
-  } else if (router.currentRoute.name != "Login") {
-    next({ name: 'Login' })
+    return;
   }
+
+  next();
+
 })
 
 export default router;

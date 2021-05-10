@@ -51,3 +51,17 @@ body{
   height: 100%;
   padding: 0.5rem;
 }
+
+
+.toolbar{
+  display:flex;
+  background:#eee;
+  padding:.25rem;
+  justify-content: space-between;
+}
+
+#slide-menu, .wrapper{
+  z-index: 9;
+  position: relative;
+  height: 100%;
+}

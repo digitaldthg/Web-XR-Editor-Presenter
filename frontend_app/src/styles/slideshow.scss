@@ -38,6 +38,7 @@ button {
 
 .slideshow-container{
   position: fixed;
+  z-index: 9;
   bottom: 0;
   width: 100%;
   display: flex;
