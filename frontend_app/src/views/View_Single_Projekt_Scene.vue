@@ -4,20 +4,42 @@
     class="menu pointerOff"
     v-if="this.$store.state.currentProjekt != null"
   >
-    <h1>
-      {{ this.$store.state.currentProjekt.Name }} als
-      {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
-    </h1>
-    <div class="button-wrapper pointerOn">
-      <button @click="SetViewMode('Desktop')">Desktop</button>
+    <div class="wrapper button-wrapper pointerOn">
+      <h1>
+        {{ this.$store.state.currentProjekt.Name }} als
+        {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
+      </h1>
+      <h4>Ausspielungsarten:</h4>
       <div @click="SetViewMode('VR')">
-        <div ref="placeholderVRButton"></div>
+        <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
       </div>
+
       <div @click="SetViewMode('AR')">
-        <div ref="placeholderARButton"></div>
+        <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
       </div>
-      <button @click="ActivateTransform">Ursprung verschieben</button>
-      <button @click="ActivatePlaneDetection">Oberfläche finden</button>
+    </div>
+
+    <div class="wrapper button-wrapper pointerOn">
+      <h4>Aktionen:</h4>
+      <div>
+        <button
+          :class="'cta-button --active-' + this.$store.state.transformActive"
+          @click="ActivateTransform"
+        >
+          Ursprung verschieben
+        </button>
+      </div>
+      <div>
+        <button
+          v-if="this.$store.state.viewMode == 'AR'"
+          :class="
+            'cta-button --active-' + this.$store.state.planeDetectionActive
+          "
+          @mouseup="ActivatePlaneDetection"
+        >
+          Oberfläche finden
+        </button>
+      </div>
       <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
     </div>
     <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
@@ -52,14 +74,21 @@ export default {
   },
   watch: {
     "$store.state.mainScene": function () {
-      if (this.$store.state.mainScene != null) {
-        this.$refs.placeholderVRButton.appendChild(
-          this.$store.state.mainScene.xr.Controls.GetVRButton()
-        );
-        this.$refs.placeholderARButton.appendChild(
-          this.$store.state.mainScene.xr.Controls.arButton.GetButton()
-        );
-      }
+      this.SetButtons();
+    },
+  },
+  computed: {
+    VrButtonVisible: function () {
+      return (
+        this.$store.state.viewMode == "Desktop" ||
+        this.$store.state.viewMode == "VR"
+      );
+    },
+    ArButtonVisible: function () {
+      return (
+        this.$store.state.viewMode == "Desktop" ||
+        this.$store.state.viewMode == "AR"
+      );
     },
   },
   data() {
@@ -69,8 +98,37 @@ export default {
     };
   },
   methods: {
+    SetButtons() {
+      if (this.$store.state.mainScene != null) {
+        if (this.$refs.placeholderVRButton != null) {
+          this.$refs.placeholderVRButton.appendChild(
+            this.$store.state.mainScene.xr.Controls.GetVRButton()
+          );
+          this.$store.state.mainScene.xr.Controls.GetVRButton().classList.add(
+            "cta-button"
+          );
+        }
+
+        if (this.$refs.placeholderARButton != null) {
+          this.$refs.placeholderARButton.appendChild(
+            this.$store.state.mainScene.xr.Controls.arButton.GetButton()
+          );
+          document.getElementById("ARButton").classList.add("cta-button");
+          //this.$store.state.mainScene.xr.Controls.arButton.GetButton().classList.add('cta-button')
+          //console.log("AR BUTTON ",this.$store.state.mainScene.xr.Controls.arButton.GetButton())
+        }
+      }
+    },
     ActivatePlaneDetection() {
-      this.$store.commit("SetTrackingActive",true)
+      this.$nextTick(() => {
+        console.log("Button clicke - next tick");
+        setTimeout(() => {
+          this.$store.commit(
+            "SetTrackingActive",
+            !this.$store.state.planeDetectionActive
+          );
+        }, 100);
+      });
     },
     ActivateTransform() {
       this.$store.commit("SetTransformActive");
@@ -168,10 +226,7 @@ export default {
 };
 </script>
 
-<style scoped>
-button {
-  margin-right: 5px;
-}
+<style lang="scss" scoped>
 .button-wrapper {
   position: relative;
   margin-bottom: 1rem;
@@ -180,10 +235,12 @@ button {
 .menu {
   display: inline-block;
   z-index: 2;
-  position: relative;
+  position: fixed;
   width: 100%;
   height: 100%;
   padding: 50px 5px 5px 5px;
+  left: 0px;
+  top: 0px;
 }
 .tracked-true {
   background: #899da4;

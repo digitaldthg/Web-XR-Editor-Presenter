@@ -42,7 +42,7 @@ export default {
 </script>
 <style scoped>
 .scene-wrapper{
-  position: absolute;
+  position: fixed;
   width:100%;
   height: 100%;
   top:0px;
@@ -50,9 +50,11 @@ export default {
   z-index: 1;
 }
 #scene {
-  position: relative;
+  position: fixed;
   pointer-events: all;
   width:100%;
   height: 100%;
+  top:0px;
+  left:0px;
 }
 </style>

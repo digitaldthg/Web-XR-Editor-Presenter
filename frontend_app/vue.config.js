@@ -3,8 +3,28 @@ module.exports = {
     https: true,
     headers: { 'Access-Control-Allow-Origin': '*' }
   },
+
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "./src/styles/variables.scss";
+          @import "./src/styles/buttons.scss";
+        `
+      }
+    }
+  },
+
   chainWebpack: config => {
     config.module.rules.delete("svg");
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap(options => {
+        options.limit = -1
+        return options
+      });
   },
 
   configureWebpack: {
@@ -19,7 +39,7 @@ module.exports = {
           ]
         },
         {
-          test: /\.(bin|glb|patt|png|dat)$/,
+          test: /\.(bin|glb|patt|dat)$/,
           use: [
             {
               loader: 'file-loader'

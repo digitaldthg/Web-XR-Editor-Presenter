@@ -66,6 +66,7 @@ button {
   height: 100px;
   display: flex;
   z-index: 2;
+
 }
 .preview-wrapper {
   flex: 1;
@@ -75,5 +76,6 @@ button {
   border-radius: 5px;
   padding: 5px;
   background-color: white;
+  background-color: #eee;
 }
 </style>

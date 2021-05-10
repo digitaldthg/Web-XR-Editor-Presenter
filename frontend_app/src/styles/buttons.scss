@@ -1,0 +1,15 @@
+.cta-button{
+    border:solid 1px black;
+    outline: none;
+padding:.5rem 1rem;
+  background:#eee;
+  color:#333;
+  text-decoration: none;
+  font-size: .8rem;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.--active-true{
+    background:#777;
+}

@@ -45,6 +45,7 @@ export default {
   overflow: hidden;
   position: relative;
   margin-right:5px;
+  border-radius: 5px;
 }
 
 .visible-true {

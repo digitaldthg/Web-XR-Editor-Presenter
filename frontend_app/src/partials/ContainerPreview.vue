@@ -48,6 +48,7 @@ export default {
   margin-bottom: 5px;
   padding: 5px;
   position: relative;
+  border-radius: 5px;
 }
 .visible-true {
   border-width: 5px;
