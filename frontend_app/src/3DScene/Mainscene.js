@@ -21,8 +21,9 @@ class MainScene {
 
   }
   Init() {
-    this.xr.Controls.SetPosition(0, 2, 30);
-    this.xr.Camera
+    this.xr.Controls.SetPosition(0, 0,0);
+    this.xr.Camera.SetPosition(0,0.1,0.5);
+
     console.log("Camera ", this.xr.Camera)
 
     console.log("TEXT PNG ", textPng)
@@ -40,6 +41,7 @@ class MainScene {
     this.reticle = new THREE.Mesh(geometryRecticle, materialRecticle);
     this.reticle.visible = false;
     this.xr.Controls.arButton.SetReticle(this.reticle);
+    this.xr.Scene.scale.set(0.01,0.01,0.01)
 
     this.xr.Scene.add(this.reticle);
 
