@@ -1,51 +1,47 @@
 <template>
-  <div
-    
-    class="menu pointerOff"
-    v-if="this.$store.state.currentProjekt != null"
-  >
-  <div id="slide-menu">
-    <div class="wrapper button-wrapper pointerOn" >
-      <h1>
-        {{ this.$store.state.currentProjekt.Name }} als
-        {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
-      </h1>
-      <h4>Ausspielungsarten:</h4>
-      <!--<div @click="SetViewMode('VR')">
+  <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
+    <div id="slide-menu">
+      <div class="wrapper button-wrapper pointerOn">
+        <h1>
+          {{ this.$store.state.currentProjekt.Name }} als
+          {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
+        </h1>
+        <h4>Ausspielungsarten:</h4>
+        <!--<div @click="SetViewMode('VR')">
         <div v-if="VrButtonVisible" ref="placeholderVRButton"></div>
       </div>-->
 
-      <div @click="SetViewMode('AR')">
-        <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
+        <div @click="SetViewMode('AR')">
+          <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="wrapper button-wrapper pointerOn">
-      <h4>Aktionen:</h4>
-      <div>
-        <button
-          :class="'cta-button --active-' + this.$store.state.transformActive"
-          @click="ActivateTransform"
-        >
-          Ursprung verschieben
-        </button>
+      <div class="wrapper button-wrapper pointerOn">
+        <h4>Aktionen:</h4>
+        <div>
+          <button
+            :class="'cta-button --active-' + this.$store.state.transformActive"
+            @click="ActivateTransform"
+          >
+            Ursprung verschieben
+          </button>
+        </div>
+        <div>
+          <button
+            v-if="this.$store.state.viewMode == 'AR'"
+            :class="
+              'cta-button --active-' + this.$store.state.planeDetectionActive
+            "
+            @mouseup="ActivatePlaneDetection"
+          >
+            Oberfläche finden
+          </button>
+        </div>
+        <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
       </div>
-      <div>
-        <button
-          v-if="this.$store.state.viewMode == 'AR'"
-          :class="
-            'cta-button --active-' + this.$store.state.planeDetectionActive
-          "
-          @mouseup="ActivatePlaneDetection"
-        >
-          Oberfläche finden
-        </button>
-      </div>
-      <!--<button @click="SetViewMode('AR_Marker')">AR mit Marker</button>-->
+      <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
+      <Slideshow v-if="this.$route.params.role != 'visitor'" />
     </div>
-    <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
-    <Slideshow v-if="this.$route.params.role != 'visitor'" />
-  </div>
     <AframeScene v-if="this.$store.state.viewMode == 'AR_Marker'" />
     <WebXRScene v-if="this.$store.state.viewMode != 'AR_Marker'" />
   </div>
@@ -69,9 +65,13 @@ export default {
     ContainerPreviewContainer,
   },
   mounted() {
-    this.$store
-      .dispatch("GetSingleProjekt", this.$route.params.id)
-      .then(this.Init);
+    if (this.$store.state.jwt != null) {
+      this.$store
+        .dispatch("GetSingleProjekt", this.$route.params.id)
+        .then(this.Init);
+    } else {
+      this.$router.push("/Login");
+    }
   },
   watch: {
     "$store.state.mainScene": function () {
@@ -107,7 +107,7 @@ export default {
           );
           this.$store.state.mainScene.xr.Controls.GetVRButton().classList.add(
             "cta-button"
-          )
+          );
         }
 
         if (this.$refs.placeholderARButton != null) {

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import config from './main.config';
 import Vuex from 'vuex';
+import Utils from './Common/Utils';
 
 Vue.use(Vuex);
 
@@ -23,7 +24,9 @@ export const store = new Vuex.Store({
     viewMode: 'Desktop',
     transformActive: false,
     planeDetectionActive: true,
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4MzAxNTU1LCJleHAiOjE2MjA4OTM1NTV9.oRC9b4h3Vy2sr3XUvLk8e0scJ-e3itwvlCaPbmSxwLY'
+    jwt: null,
+    user : null,
+    //token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4MzAxNTU1LCJleHAiOjE2MjA4OTM1NTV9.oRC9b4h3Vy2sr3XUvLk8e0scJ-e3itwvlCaPbmSxwLY'
   },
   actions: {
     GetProjekte({ commit }) {
@@ -32,7 +35,7 @@ export const store = new Vuex.Store({
         url: config.CMS_BASE_URL + '/projekts',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.state.token}`
+          'Authorization': `Bearer ${this.state.jwt}`
         }
       }).then(response => {
 
@@ -63,7 +66,7 @@ export const store = new Vuex.Store({
         url: config.CMS_BASE_URL + '/projekts/' + id,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.state.token}`
+          'Authorization': `Bearer ${this.state.jwt}`
         }
       }).then(response => {
         commit("SetSingleProjekt", response.data);
@@ -120,7 +123,30 @@ export const store = new Vuex.Store({
     SetTrackingActive(state,mode){
       console.log("Set Tracking Active ", mode)
       state.planeDetectionActive = mode;
-    }
+    },
+    UserAuth(state, data){
+
+      console.log("store", data);
+
+      state.jwt = data.jwt;
+      state.user = data.user;
+      
+      Utils.SetCookie("jwt", data.jwt, 1);
+    },
+    Logout(state,data){
+      Utils.DeleteCookie("jwt");
+      state.loggedIn = false;
+      state.jwt = null;
+      state.user = null;
+    },
+    SetJWT(state,jwt){
+      state.jwt = jwt;
+      state.loggedIn = true;
+      Utils.SetCookie("jwt", jwt, 1);
+    },
+    SetUser(state,user){
+      state.user = user;
+    },
   }
 
 })

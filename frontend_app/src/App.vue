@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navigation />
-    
+
     <main class="pointerOff main">
       <router-view></router-view>
     </main>
@@ -10,18 +10,21 @@
 
 <script>
 import "./styles/main.scss";
-
+import Utils from "./Common/Utils";
+import config from './main.config';
 import Navigation from "./partials/navigation.vue";
+import IOMixin from './Mixins/IOMixin';
 
 export default {
   name: "App",
   components: {
     Navigation,
   },
+  mixins : [IOMixin],
   mounted() {
-    console.log("app", this.$route.path);
 
-    this.$store.dispatch("GetProjekte");
+  },
+  methods: {
 
   },
   watch: {
@@ -33,20 +36,18 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-.pointerOn{
-pointer-events: all;
+.pointerOn {
+  pointer-events: all;
 }
 
-.pointerOff{
-pointer-events: none;
+.pointerOff {
+  pointer-events: none;
 }
 
-.main{
+.main {
   z-index: 2;
   position: fixed;
   top: $navigation-height;
-  left:0px;
+  left: 0px;
 }
 </style>
