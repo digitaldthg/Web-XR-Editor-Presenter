@@ -72,6 +72,8 @@ export default {
     } else {
       this.$router.push("/Login");
     }
+
+    //this.$store.commit("SetSelectedSlideContainer",this.$store.state.currentProjekt)
   },
   watch: {
     "$store.state.mainScene": function () {
@@ -181,23 +183,9 @@ export default {
       return this.$store.state.currentSelectedSlideContainer == container;
     },
     Init() {
-      /*var projekt = this.$store.state.currentProjekt;
-      var objectsToLoad = this.ExtractModelsFromProjekt(projekt);
-
-      var loadObj = Object.keys(objectsToLoad).map((id) => {
-        var obj = objectsToLoad[id];
-        console.log("Objects to load: ", obj.element.Type.Type);
-        var url = null;
-        if (obj.element.Type.Type == "Object3D") {
-          url = config.CMS_BASE_URL + obj.element.Asset.url
-        }
-        return {
-            name: obj.id,
-            url: url,
-          };
-      });
-
-      console.log(loadObj);*/
+      if (this.$store.state.currentProjekt.slide_containers.length > 0) {
+        this.SetSelected(this.$store.state.currentProjekt.slide_containers[0]);
+      }
     },
     loadProgress(progress) {
       this.loading = progress.isLoading;
