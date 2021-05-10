@@ -52,6 +52,7 @@ class MainScene {
     this.xr.Scene.add(this.rootGroup);
 
     this.control = new TransformControls(this.xr.Camera.instance, document.getElementById(this.domElement));
+    this.control.scale.set(100,100,100)
 
     this.control.addEventListener('dragging-changed', (event) => {
       console.log("DRAGGING CHANGED ", event)
