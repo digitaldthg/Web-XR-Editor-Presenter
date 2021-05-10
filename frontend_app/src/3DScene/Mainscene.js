@@ -69,7 +69,7 @@ class MainScene {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x55ff99 });
     this.cube = new THREE.Mesh(geometry, material);
-    this.rootGroup.add(this.cube);
+    //this.rootGroup.add(this.cube);
     this.xr.Controls.arButton.SetRootElement(this.rootGroup);
 
     this.store.watch(
