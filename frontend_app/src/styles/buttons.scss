@@ -1,14 +1,31 @@
+button{
+  outline:0;
+  border: 0;
+  background-color: transparent;
+}
 .cta-button{
-    border:solid 1px black;
-    outline: none;
-padding:.5rem 1rem;
+  outline: 0;
+  padding:.5rem 1rem;
   background:#eee;
   color:#333;
   text-decoration: none;
   font-size: .8rem;
   font-weight: 700;
   border-radius: 5px;
+
+
+  &.--attention{
+    color:#fff;
+    background-color: #595fa8;
+  }
+
+  &.--wide{
+    width:100%;
+    display: block;
+  }
 }
+
+
 
 .--active-true{
     background:#777;

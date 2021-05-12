@@ -31,7 +31,7 @@ export default {
 @import "../styles/main.scss";
 
 .container-navigation{
-  z-index: 2;
+  z-index: 0;
   position: absolute;
   left: 1rem;
   bottom: 0;

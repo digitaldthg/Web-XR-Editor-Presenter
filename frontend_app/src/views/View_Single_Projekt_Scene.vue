@@ -1,14 +1,14 @@
 <template>
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
     <div id="slide-menu">
-      <div class="wrapper button-wrapper pointerOn">
-        <div class="toolbar ">
-           <div @click="SetViewMode('AR')">
+      <div class="wrapper button-wrapper ">
+        <div class="toolbar pointerOn">
+           <div @click="SetViewMode('AR')" class="pointerOn">
             <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
           </div>
 
           <button
-            :class="'cta-button --active-' + this.$store.state.transformActive"
+            :class="'cta-button --attention --active-' + this.$store.state.transformActive"
             @click="ActivateTransform"
           >
             Ursprung verschieben
@@ -17,7 +17,7 @@
           <button
             v-if="this.$store.state.viewMode == 'AR'"
             :class="
-              'cta-button --active-' + this.$store.state.planeDetectionActive
+              'cta-button --attention --active-' + this.$store.state.planeDetectionActive
             "
             @mouseup="ActivatePlaneDetection"
           >
@@ -215,6 +215,10 @@ export default {
   z-index: 2;
 }
 
+.--active-false{
+  background-color: #899da4!important;
+}
+
 .tracked-true {
   background: #899da4;
 }
@@ -249,4 +253,6 @@ export default {
   align-items: center;
   color: #fff;
 }
+
+
 </style>

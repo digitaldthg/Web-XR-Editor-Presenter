@@ -51,7 +51,6 @@ export default {
 .appinfopanel {
 	padding: 5px;
   border: solid #000;
-  border-width: 1px;
 }
 </style>
 

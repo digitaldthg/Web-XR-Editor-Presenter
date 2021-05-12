@@ -41,19 +41,12 @@ export default {
   height: 100%;
   min-width: $slideshow-height;
   background: white;
-  border-style: solid;
   overflow: hidden;
   position: relative;
   margin-right:5px;
   border-radius: 5px;
-}
-
-.visible-true {
-  border-width: 5px;
-}
-
-.visible-false {
-  border-width: 1px;
+  box-shadow: 0 0 0 3px #eee;
+  margin-right: 1rem;
 }
 
 

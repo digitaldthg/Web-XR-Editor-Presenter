@@ -1,13 +1,15 @@
 <template>
-  <div class="login-form pointerOn">
-    <template v-if="failed">
-      <div class="warning">
-        <h1>Ups! Etwas ist schiefgelaufen!</h1>
-      </div>
-    </template>
-    <input type="text" name="email" v-model="user.name"/>
-    <input type="text" name="passwort" v-model="user.pw"/>
-    <button @click="Login" >Login</button>
+  <div class="login-page">
+    <div class="login-form pointerOn">
+      <template v-if="failed">
+        <div class="warning">
+          <h1>Ups! Etwas ist schiefgelaufen!</h1>
+        </div>
+      </template>
+      <input type="text" name="email" v-model="user.name"/>
+      <input type="password" name="passwort" v-model="user.pw"/>
+      <button class="cta-button --attention --wide" @click="Login" >Login</button>
+    </div>
   </div>
 </template>
 
@@ -63,14 +65,32 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.login-page{
+  width: 100%;
+  height: calc(100% + 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -50px;
+  position: relative;
+}
 .login-form {
   padding: 1rem;
   box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
   display: inline-block;
+}
 
-  /*input{
-    display: block;
-  }*/
+input{
+  font-size: 1rem;
+  padding:0;
+  margin:0;
+  border:0;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.5);
+  padding:.25rem;
+  display: block;
+  line-height: 1rem;
+  margin-bottom:.5rem;
 }
 </style>

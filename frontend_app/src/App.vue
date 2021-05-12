@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <Navigation />
-
+    <Navigation v-if="$route.name != 'Login'"/>
     <main class="pointerOff main">
       <router-view></router-view>
     </main>

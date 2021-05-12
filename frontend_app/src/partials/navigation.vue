@@ -11,7 +11,7 @@ export default {
   name : "Navigation",
   methods:{
     HandleLogout(){
-      this.$route.push({name : "Login"});
+      this.$router.push({name : "Login"});
       this.$store.commit('Logout');
 
     }
@@ -27,7 +27,8 @@ export default {
     width:100%;
     height: $navigation-height;
     display: flex;
-    justify-content: space-around;
+    padding:0 1rem;
+    justify-content: space-between;
     align-items: center;
     position: absolute;
     top:0;
