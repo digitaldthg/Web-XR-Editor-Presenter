@@ -25,6 +25,8 @@ export default {
   },
   methods: {
     AddAllElements() {
+
+      console.log("AddAllElements");
       Object.values(this.slideElements).forEach((element) => {
         
         if (element.Offset != null) {
@@ -44,13 +46,13 @@ export default {
           );
         }
 
-        if (element.Scale != null) {
-          element.scene.scale.set(
-            element.Scale.x *  0.01,
-            element.Scale.y * 0.01,
-            element.Scale.z * 0.01
-          );
-        }
+        // if (element.Scale != null) {
+        //   element.scene.scale.set(
+        //     element.Scale.x *  0.01,
+        //     element.Scale.y * 0.01,
+        //     element.Scale.z * 0.01
+        //   );
+        // }
         console.log("SlideElement: ",element);
         this.$store.state.mainScene.rootGroup.add(element.scene);
       });
