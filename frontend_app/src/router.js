@@ -9,11 +9,13 @@ import { store } from './store';
 import axios from 'axios';
 import config from "./main.config.js"
 import IOMixins from './Mixins/IOMixin';
+import vueConfig from '../vue.config';
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: "history",
+  base: vueConfig.publicPath,
+  mode: "hash",
   routes: [
     {
       path: '/',

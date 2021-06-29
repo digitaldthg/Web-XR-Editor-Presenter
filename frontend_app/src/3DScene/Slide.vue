@@ -46,9 +46,9 @@ export default {
 
         if (element.Scale != null) {
           element.scene.scale.set(
-            element.Scale.x,
-            element.Scale.y,
-            element.Scale.z
+            element.Scale.x *  0.01,
+            element.Scale.y * 0.01,
+            element.Scale.z * 0.01
           );
         }
         console.log("SlideElement: ",element);
