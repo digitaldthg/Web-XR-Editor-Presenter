@@ -9,8 +9,6 @@
 
 <script>
 import "./styles/main.scss";
-import Utils from "./Common/Utils";
-import config from './main.config';
 import Navigation from "./partials/navigation.vue";
 import IOMixin from './Mixins/IOMixin';
 
@@ -20,12 +18,6 @@ export default {
     Navigation,
   },
   mixins : [IOMixin],
-  mounted() {
-
-  },
-  methods: {
-
-  },
   watch: {
     $route(to, from) {
       console.log(to, from);

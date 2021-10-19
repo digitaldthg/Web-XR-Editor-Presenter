@@ -28,9 +28,6 @@ export default {
       }
     }
   },
-  mounted(){
-    console.log("Login");
-  },
   methods:{
     Login(){
       console.log(this.user.name, this.user.pw);

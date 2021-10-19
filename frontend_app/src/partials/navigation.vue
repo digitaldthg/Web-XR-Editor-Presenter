@@ -1,7 +1,6 @@
 <template>
   <nav>
     <router-link to="/projekte">Projekte</router-link>
-
     <button class="cta-button" @click="HandleLogout">Logout</button>
   </nav>
 </template>

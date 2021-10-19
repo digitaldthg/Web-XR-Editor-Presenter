@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import config from "../main.config";
 import SlideContainer from "./SlideContainer.vue";
 import MainScene from "./Mainscene";
 export default {
@@ -18,15 +17,7 @@ export default {
   components: {
     SlideContainer,
   },
-  data() {
-    return {
-    };
-  },
-  methods: {
-
-  },
   mounted(){
-    
     if (this.$store.state.xr == null) {
       var scene = new MainScene({
         store: this.$store,

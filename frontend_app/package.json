@@ -24,6 +24,7 @@
     "url-loader": "^2.3.0",
     "vue": "^2.6.11",
     "vue-markdown": "^2.2.4",
+    "vue-prune": "^0.1.0",
     "vue-router": "^3.5.1",
     "vue-svg-loader": "^0.16.0",
     "vuex": "^3.6.2"

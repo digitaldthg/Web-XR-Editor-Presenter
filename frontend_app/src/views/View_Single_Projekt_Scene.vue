@@ -1,14 +1,17 @@
 <template>
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
     <div id="slide-menu">
-      <div class="wrapper button-wrapper ">
+      <div class="wrapper button-wrapper">
         <div class="toolbar pointerOn">
-           <div @click="SetViewMode('AR')" class="pointerOn">
+          <div @click="SetViewMode('AR')" class="pointerOn">
             <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
           </div>
 
           <button
-            :class="'cta-button --attention --active-' + this.$store.state.transformActive"
+            :class="
+              'cta-button --attention --active-' +
+              this.$store.state.transformActive
+            "
             @click="ActivateTransform"
           >
             Ursprung verschieben
@@ -17,7 +20,8 @@
           <button
             v-if="this.$store.state.viewMode == 'AR'"
             :class="
-              'cta-button --attention --active-' + this.$store.state.planeDetectionActive
+              'cta-button --attention --active-' +
+              this.$store.state.planeDetectionActive
             "
             @mouseup="ActivatePlaneDetection"
           >
@@ -25,24 +29,22 @@
           </button>
         </div>
         <div class="project-meta">
-        <h1>
-          {{ this.$store.state.currentProjekt.Name }} als
-          {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
-        </h1>
-        </div>       
+          <h1>
+            {{ this.$store.state.currentProjekt.Name }} als
+            {{ this.$route.params.role }} ({{ this.$store.state.viewMode }})
+          </h1>
+        </div>
       </div>
 
       <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
       <Slideshow v-if="this.$route.params.role != 'visitor'" />
     </div>
-    <AframeScene v-if="this.$store.state.viewMode == 'AR_Marker'" />
-    <WebXRScene v-if="this.$store.state.viewMode != 'AR_Marker'" />
+    <WebXRScene />
   </div>
 </template>
 
 <script>
 import config from "../main.config";
-import AframeScene from "../3DScene/AframeScene";
 import WebXRScene from "../3DScene/WebXRScene";
 import Slideshow from "../partials/Slideshow";
 import AppDropdown from "../components/AppDropdown";
@@ -51,7 +53,6 @@ import ContainerPreviewContainer from "../partials/ContainerPreviewContainer";
 export default {
   name: "View_Single_Projekt_Scene",
   components: {
-    AframeScene,
     WebXRScene,
     Slideshow,
     AppDropdown,
@@ -65,8 +66,6 @@ export default {
     } else {
       this.$router.push("/Login");
     }
-
-    //this.$store.commit("SetSelectedSlideContainer",this.$store.state.currentProjekt)
   },
   watch: {
     "$store.state.mainScene": function () {
@@ -110,12 +109,9 @@ export default {
             this.$store.state.mainScene.xr.Controls.arButton.GetButton()
           );
           var arBtn = document.getElementById("ARButton");
-          if(arBtn != null){
+          if (arBtn != null) {
             arBtn.classList.add("cta-button");
-
           }
-          //this.$store.state.mainScene.xr.Controls.arButton.GetButton().classList.add('cta-button')
-          //console.log("AR BUTTON ",this.$store.state.mainScene.xr.Controls.arButton.GetButton())
         }
       }
     },
@@ -134,11 +130,9 @@ export default {
       this.$store.commit("SetTransformActive");
     },
     SetContainer(container) {
-      console.log("CONTAINER: ", container);
       this.$store.commit("SetSelectedSlideContainer", container);
     },
     SetViewMode(mode) {
-      //this.$store.state.mainScene.xr.Controls.arButton.SetDomOverlay(document.getElementById('ContainerPreview'));
       this.$store.commit("SetViewMode", mode);
     },
     GetOptions() {
@@ -153,7 +147,6 @@ export default {
               image = config.CMS_BASE_URL + url;
             }
           }
-          console.log("MARKER ", url);
           options.push({
             value: container.Name,
             info: container,
@@ -186,7 +179,6 @@ export default {
     },
     loadProgress(progress) {
       this.loading = progress.isLoading;
-      // console.log(progress);
     },
     ExtractModelsFromProjekt(projekt) {
       var elements = {};
@@ -219,8 +211,8 @@ export default {
   z-index: 2;
 }
 
-.--active-false{
-  background-color: #899da4!important;
+.--active-false {
+  background-color: #899da4 !important;
 }
 
 .tracked-true {
@@ -257,6 +249,4 @@ export default {
   align-items: center;
   color: #fff;
 }
-
-
 </style>

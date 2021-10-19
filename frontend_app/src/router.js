@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import View_Home from './views/View_Home.vue';
 import View_Projekte from './views/View_Projekte.vue';
 import View_Single_Projekt_Scene from './views/View_Single_Projekt_Scene.vue';
 import Login from './views/Login.vue'
@@ -8,7 +7,6 @@ import Utils from './Common/Utils'
 import { store } from './store';
 import axios from 'axios';
 import config from "./main.config.js"
-import IOMixins from './Mixins/IOMixin';
 import vueConfig from '../vue.config';
 
 Vue.use(VueRouter)
@@ -47,9 +45,6 @@ router.beforeEach((to, from, next) => {
       to.name != "Login") {
 
     next({ name: "Login" });
-
-
-    console.log("go to login");
 
     return;
   }

@@ -25,8 +25,6 @@ export default {
   },
   methods: {
     AddAllElements() {
-
-      console.log("AddAllElements");
       Object.values(this.slideElements).forEach((element) => {
         
         if (element.Offset != null) {
@@ -45,18 +43,8 @@ export default {
             element.Rotation.w
           );
         }
-
-        // if (element.Scale != null) {
-        //   element.scene.scale.set(
-        //     element.Scale.x *  0.01,
-        //     element.Scale.y * 0.01,
-        //     element.Scale.z * 0.01
-        //   );
-        // }
-        console.log("SlideElement: ",element);
         this.$store.state.mainScene.rootGroup.add(element.scene);
       });
-      console.log("Root Group ",this.$store.state.mainScene.rootGroup)
     },
 
     RemoveAllElements() {
@@ -104,11 +92,6 @@ export default {
         this.slideElements[slideElem.id] = slideElem;
         this.slideElements[slideElem.id].scene =
           library[slideElem.element.Name].scene;
-        console.log(
-          "Create gltf element for slide: ",
-          this.slide.Name,
-          this.slideElements[slideElem.id]
-        );
       });
 
       if (this.$store.state.currentSlideIdx == this.order) {
@@ -128,12 +111,6 @@ export default {
     );
   },
   destroyed() {
-    console.log(
-      "Destory: ",
-      this.order,
-      " ",
-      this.$store.state.currentSlideIdx
-    );
     this.RemoveAllElements();
   },
 };

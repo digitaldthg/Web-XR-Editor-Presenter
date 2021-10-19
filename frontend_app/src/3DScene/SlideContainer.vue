@@ -18,22 +18,9 @@ export default {
     container: null,
   },
   components: {Slide},
-  computed: {
-    currentSlideIdx() {
-      return this.$store.state.currentSlideIdx;
-    },
-  },
-  data() {
-    return {
-
-    };
-  },
   methods: {
     GetModelPath(path) {
       return config.CMS_BASE_URL + path;
-    },
-    init() {
-      
     },
     animate: function () {
       requestAnimationFrame(this.animate);

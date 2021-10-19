@@ -11,20 +11,6 @@ Vue.config.productionTip = false;
 import VueMarkdown from 'vue-markdown';
 Vue.component('vue-markdown', VueMarkdown);
 
-
-Vue.config.ignoredElements = [
-  'a-scene',
-  'a-entity',
-  'a-camera',
-  'a-box',
-  'a-assets',
-  'a-marker',
-  'a-light',
-  'a-marker-camera',
-  'a-group'
-]
-
-
 const app = new Vue({
   el: '#app',
   store,
