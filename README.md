@@ -6,7 +6,7 @@ Dieser Prototyp ist im Rahmen des Forschungsprojekts "Im/material Theatre Spaces
 ## Projektaufbau
 Das Projekt wurde mit [Vue 2](https://vuejs.org/) entwickelt und nutzt [three.js](https://threejs.org/) als WebGL Framework. Eine Demo des WebXR Presenters finden Sie [hier](https://developer.digital.dthg.de/tpXRFrontend).
 
-Nach dem Login kann eines der für den eingeloggten User verfügbaren Projekt gestartet werden. Wird AR auf dem Gerät unterstützt kann von dort aus in den AR Modus gewechselt werden. Sobald eine horizontale Fläche detektiert wurde kann die Position des Präsentationsinhaltes, durch das Tippen auf das auf der Fläche erschienene Rechteck, dort festgelegt werden.
+Nach dem Login kann eines der für den eingeloggten User verfügbaren Projekt gestartet werden. Wird AR auf dem Gerät unterstützt, kann von dort aus in den AR Modus gewechselt werden. Sobald eine horizontale Fläche detektiert wurde kann die Position des Präsentationsinhaltes, durch das Tippen auf das auf der Fläche erschienene Rechteck, dort festgelegt werden.
   
 ## Installation & Entwicklung
 
