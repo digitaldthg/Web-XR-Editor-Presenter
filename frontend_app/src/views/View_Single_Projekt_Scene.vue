@@ -109,7 +109,11 @@ export default {
           this.$refs.placeholderARButton.appendChild(
             this.$store.state.mainScene.xr.Controls.arButton.GetButton()
           );
-          document.getElementById("ARButton").classList.add("cta-button");
+          var arBtn = document.getElementById("ARButton");
+          if(arBtn != null){
+            arBtn.classList.add("cta-button");
+
+          }
           //this.$store.state.mainScene.xr.Controls.arButton.GetButton().classList.add('cta-button')
           //console.log("AR BUTTON ",this.$store.state.mainScene.xr.Controls.arButton.GetButton())
         }
