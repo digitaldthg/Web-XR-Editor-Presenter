@@ -2,11 +2,14 @@
   <div class="menu pointerOff" v-if="this.$store.state.currentProjekt != null">
     <div id="slide-menu">
       <div class="wrapper button-wrapper">
+        <!-- BUTTONS-->
         <div class="toolbar pointerOn">
+          <!-- AR BUTTON-->
           <div @click="SetViewMode('AR')" class="pointerOn">
             <div v-if="ArButtonVisible" ref="placeholderARButton"></div>
           </div>
 
+          <!-- Ursprung verschieden BUTTON-->
           <button
             :class="
               'cta-button --attention --active-' +
@@ -17,6 +20,7 @@
             Ursprung verschieben
           </button>
 
+          <!-- Plane Detection BUTTON-->
           <button
             v-if="this.$store.state.viewMode == 'AR'"
             :class="
@@ -28,6 +32,7 @@
             Oberfläche finden
           </button>
         </div>
+
         <div class="project-meta">
           <h1>
             {{ this.$store.state.currentProjekt.Name }} als
@@ -35,7 +40,7 @@
           </h1>
         </div>
       </div>
-
+      <!--Rolle ist per default immer 'presenter'-->
       <ContainerPreviewContainer v-if="this.$route.params.role != 'visitor'" />
       <Slideshow v-if="this.$route.params.role != 'visitor'" />
     </div>
@@ -59,6 +64,7 @@ export default {
     ContainerPreviewContainer,
   },
   mounted() {
+    //Lade alles Daten des ausgewaehlten Projektse aus dem CMS in den store
     if (this.$store.state.jwt != null) {
       this.$store
         .dispatch("GetSingleProjekt", this.$route.params.id)
@@ -117,7 +123,6 @@ export default {
     },
     ActivatePlaneDetection() {
       this.$nextTick(() => {
-        console.log("Button clicke - next tick");
         setTimeout(() => {
           this.$store.commit(
             "SetTrackingActive",
@@ -159,9 +164,6 @@ export default {
     },
     SetSlideIdx(direction) {
       this.$store.commit("SetCurrentSlideIdx", direction);
-    },
-    GetPattern() {
-      return pattern;
     },
     SetSelected(container) {
       this.$store.commit("SetSelectedSlideContainer", container);

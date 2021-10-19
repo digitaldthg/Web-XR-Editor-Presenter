@@ -24,10 +24,6 @@ class MainScene {
     this.xr.Controls.SetPosition(0, 0,0);
     this.xr.Camera.SetPosition(0,0.1,0.5);
 
-    console.log("Camera ", this.xr.Camera)
-
-    console.log("TEXT PNG ", textPng)
-
     const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(0, 2, 0);
     this.xr.Scene.add(light);
@@ -56,10 +52,8 @@ class MainScene {
     //this.control.scale.set(100,100,100)
 
     this.control.addEventListener('dragging-changed', (event) => {
-      console.log("DRAGGING CHANGED ", event)
       this.xr.Controls.Desktop.instance.enabled = !event.value;
       this.xr.Controls.Desktop.orbit.enabled = !event.value;
-      console.log("ORBIT enabled ", this.xr.Controls.Desktop.instance.enabled)
     });
 
     this.control.attach(this.rootGroup);
@@ -99,12 +93,6 @@ class MainScene {
 
     this.xr.Events.addEventListener("OnAnimationLoop", () => {
       ThreeMeshUI.update();
-    })
-
-
-
-    document.addEventListener('fullscreenchange', () => {
-      console.log("FULLSCREEN")
     })
   }
 

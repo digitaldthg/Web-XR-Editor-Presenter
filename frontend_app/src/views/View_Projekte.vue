@@ -21,6 +21,7 @@ export default {
   },
   mounted(){
     if(this.$store.state.jwt != null){
+      //Lade alle Projeke des eingeloggten Users aus dem CMS in den Store
       this.$store.dispatch("GetProjekte");
     }else{
       console.log("nothing");
