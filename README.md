@@ -1,4 +1,4 @@
-# WebXR Frontend App (Presenter)
+# WebXR Editor (Presenter)
 Mit der WebXR Frontend App können eingeloggte User Projekte zeigen, welche mit dem [WebXR Editor](https://github.com/digitaldthg/webxr_editor) angelegt wurden. In XR-fähigen Browsern auf AR-unterstützenden Geräten können die angelegten Projekte als AR-Präsentationen gestartet werden. Mehr Informationen zum Aufbau der Projekte finden Sie in der [Read.Me des WebXR Editors](https://github.com/digitaldthg/webxr_editor).
 
 Dieser Prototyp ist im Rahmen des Forschungsprojekts "Im/material Theatre Spaces" entstanden. Weitere Informationen zum Projekt finden Sie [hier](https://digital.dthg.de/).
