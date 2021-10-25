@@ -15,58 +15,51 @@ class MainScene {
     this.library = {};
     this.cube;
     this.domElement = props.domElement;
-    //debug
     window._xr = this.xr;
     this.Init();
 
   }
   Init() {
-    this.xr.Controls.SetPosition(0, 0,0);
-    this.xr.Camera.SetPosition(0,0.1,0.5);
+    this.xr.Controls.SetPosition(0, 0, 0);
+    this.xr.Camera.SetPosition(0, 0.1, 0.5);
+    //Add AR Button
+    this.xr.Controls.arButton.SetDomOverlay(document.getElementById('slide-menu'));
 
+
+    //LIGHTS
     const light = new THREE.DirectionalLight(0xffffff, 2);
     light.position.set(0, 2, 0);
     this.xr.Scene.add(light);
-    this.CreatePrimitives();
-    //this.xr.Controls.arButton.SetDomOverlay(document.getElementById('ContainerPreview'));
-    this.xr.Controls.arButton.SetDomOverlay(document.getElementById('slide-menu'));
-    //this.xr.Controls.arButton.SetDomOverlay(document.getElementById('buttons'));
 
-    var geometryRecticle = new THREE.PlaneBufferGeometry(.2,.2,32,32);
-    var materialRecticle = new THREE.MeshBasicMaterial({ color: 0xF15C3C, side : THREE.DoubleSide });
+    this.CreatePrimitives();
+
+    //Plane Detection Reticle
+    var geometryRecticle = new THREE.PlaneBufferGeometry(.2, .2, 32, 32);
+    var materialRecticle = new THREE.MeshBasicMaterial({ color: 0xF15C3C, side: THREE.DoubleSide });
     this.reticle = new THREE.Mesh(geometryRecticle, materialRecticle);
     this.reticle.rotation.x = 90 * Math.PI / 180;
     this.reticle.visible = false;
     this.reticle.matrixAutoUpdate = true;
     this.xr.Controls.arButton.SetReticle(this.reticle);
-    //this.xr.Scene.scale.set(0.01,0.01,0.01)
-
     this.xr.Scene.add(this.reticle);
 
-
+    //ROOT GROUP
     this.rootGroup = new THREE.Group();
-    
     this.xr.Scene.add(this.rootGroup);
 
+    //INIT CONTROLS
     this.control = new TransformControls(this.xr.Camera.instance, document.getElementById(this.domElement));
-    //this.control.scale.set(100,100,100)
-
     this.control.addEventListener('dragging-changed', (event) => {
       this.xr.Controls.Desktop.instance.enabled = !event.value;
       this.xr.Controls.Desktop.orbit.enabled = !event.value;
     });
-
     this.control.attach(this.rootGroup);
     this.control.visible = this.store.state.transformActive;
-
     this.xr.Scene.add(this.control);
-
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x55ff99 });
-    this.cube = new THREE.Mesh(geometry, material);
-    //this.rootGroup.add(this.cube);
     this.xr.Controls.arButton.SetRootElement(this.rootGroup);
 
+
+    //WATCHERS
     this.store.watch(
       (state) => state.transformActive,
       (newValue, oldValue) => {
@@ -81,13 +74,14 @@ class MainScene {
       }
     );
 
+    //EVENTS
     this.xr.Events.addEventListener("OnChangeXRView", (mode) => {
       this.store.commit("SetViewMode", mode.xrMode);
     })
 
     this.xr.Events.registerEvent("OnObjectPlacedOnPlane");
+
     this.xr.Events.addEventListener("OnObjectPlacedOnPlane", () => {
-      console.log("Object Placed")
       this.store.commit("SetTrackingActive", false)
     });
 
@@ -97,6 +91,7 @@ class MainScene {
   }
 
   CreatePrimitives() {
+    //Create Primitives and add to library
     this.library.Cube = { scene: new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshNormalMaterial()) };
     this.library.Cone = { scene: new THREE.Mesh(new THREE.ConeGeometry(.5, 1, 32), new THREE.MeshNormalMaterial()) };
     this.library.Cylinder = { scene: new THREE.Mesh(new THREE.CylinderGeometry(.5, .5, 1, 32), new THREE.MeshNormalMaterial()) };

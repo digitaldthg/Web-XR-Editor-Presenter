@@ -13,20 +13,19 @@ export const store = new Vuex.Store({
     }
   },
   state: {
-    projekte: [],
+    projekte: [], //all projects of logged in user
     currentProjekt: null,
     slides: [],
     currentPage: null,
     currentSlideIdx: 0,
     currentTrackedMarkers: [],
     currentSelectedSlideContainer: null,
-    mainScene: null,
-    viewMode: 'Desktop',
+    mainScene: null, //3D Content
+    viewMode: 'Desktop', //Could also be AR
     transformActive: false,
     planeDetectionActive: true,
     jwt: null,
     user : null,
-    //token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjE4MzAxNTU1LCJleHAiOjE2MjA4OTM1NTV9.oRC9b4h3Vy2sr3XUvLk8e0scJ-e3itwvlCaPbmSxwLY'
   },
   actions: {
     GetProjekte({ commit }) {
@@ -38,8 +37,6 @@ export const store = new Vuex.Store({
           'Authorization': `Bearer ${this.state.jwt}`
         }
       }).then(response => {
-
-        commit("SetProjekte", response.data);
         return response.data;
 
       }).then((data) => {
@@ -49,7 +46,6 @@ export const store = new Vuex.Store({
       });
     },
     GetSingleProjekt({ commit, state }, id) {
-
       if (this.state.projekte.length > 0) {
         var filtered = this.state.projekte.find(p => p.id == id);
 
