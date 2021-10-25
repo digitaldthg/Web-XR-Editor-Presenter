@@ -19,6 +19,8 @@ class MainScene {
     this.Init();
 
   }
+  
+  //Set up 3D Scene
   Init() {
     this.xr.Controls.SetPosition(0, 0, 0);
     this.xr.Camera.SetPosition(0, 0.1, 0.5);
