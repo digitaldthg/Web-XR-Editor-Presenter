@@ -10,6 +10,11 @@ Nach dem Login kann eines der für den eingeloggten User verfügbaren Projekt ge
   
 ## Installation & Entwicklung
 
+### Globale Installationen
+
+**Vue Cli** `npm install -g @vue/cli` und `npm install @vue/cli-service -g`
+
+### NPM im Projekt
 Klonen oder downloaden Sie das Projekt auf Ihren Rechner und installieren Sie die Dependencies mit den nachstehenden Befehlen.
 
 **Installation** `npm install`
