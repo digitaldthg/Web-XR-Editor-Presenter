@@ -1,3 +1,0 @@
-[submodule "frontend_app/src/webxrscene"]
-	path = frontend_app/src/webxrscene
-	url = https://github.com/InvisibleRoom/package_webxrscene.git
